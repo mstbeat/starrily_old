@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+body{
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+p{
+  padding-top: 10px;
+}
+
+p.logo{
+  font-size: 0.6rem;
+  padding-left: 80px;
+  padding-top: 0;
+  color: #1e5799;
+}
+form.loginform{
+  width: 260px;
+}
+.body{
+
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    width: auto;
+    height: auto;
+    background-image: url(../img/login.jpg);
+    background-size: cover;
+    -webkit-filter: blur(3px);
+    z-index: 0;
+}
+
+.grad{
+    background-color: white;
+    opacity: 0.9;
+    position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%);
+   width: 570px;
+   height: 380px;
+}
+
+.header{
+    position: absolute;
+    top: calc(50% - 60px);
+    left: calc(50% - 255px);
+    z-index: 2;
+}
+
+
+main {
+        display: block;
+    }
+
+img{
+  width: 200px;
+}
+.login{
+    position: absolute;
+    top: calc(50% - 140px);
+    left: calc(50% - 30px);
+    padding: 10px;
+    z-index: 2;
+}
+
+.login input[type=text]{
+    width: 260px;
+    height: 30px;
+    /* background: transparent; */
+    border: 1px solid #1e5799;
+    border-radius: 2px;
+    color: #1e5799;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px;
+}
+
+.login input[type=password]{
+    width: 260px;
+    height: 30px;
+    /* background: transparent; */
+    border: 1px solid #1e5799;
+    border-radius: 2px;
+    color: #1e5799;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    padding: 4px;
+    margin-top: 10px;
+}
+
+.login input[type=button],.login input[type=submit]{
+    width: 260px;
+    height: 35px;
+    background: #1e5799;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #fff;
+    font-family: 'Exo', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 6px;
+    margin-top: 10px;
+}
+
+.login input[type=button]:hover{
+    opacity: 0.8;
+}
+
+.login input[type=button]:active{
+    opacity: 0.6;
+}
+
+.login input[type=text]:focus{
+    outline: none;
+    border: 1px solid #1e5799;
+}
+
+.login input[type=password]:focus{
+    outline: none;
+    border: 1px solid #1e5799;
+}
+
+.login input[type=button]:focus{
+    outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: #1e5799;
+}
+
+::-moz-input-placeholder{
+   color: #1e5799;
+}
+.error_required,.error_email{
+  color:red;
+}

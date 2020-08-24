@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="jp">
+<head>
+<meta charset="UTF-8">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/unity.css">
+<link rel="stylesheet" type="text/css" href="css/skillsheet_update.css">
+
+<title>スキルシート案件追加</title>
+</head>
+<body>
+	<header th:insert="/header"></header>
+	<main>
+		<div>
+			<h1 class="pagetitle">案件追加</h1>
+			<p class="errorMessage">エラーメッセージがここに入ります</p>
+		</div>
+
+	<form th:method="POST" th:action="@{/skillsheet_reference}">
+		<div class="box">
+		<p class="RequiredMessage left">※業務名、案件期間（開始月日）は必須項目です</p>
+			<div class="flex-container">
+				<div class="flex-3item flex-container">
+					<div class="flex-3item-1">
+						<p class="headline">業務名<span class="errorMessage">※</span></p>
+					</div>
+					<div class="flex-3item-2">
+						<input class="updateinput" type="text">
+					</div>
+				</div>
+				<div class="flex-3item flex-container">
+					<div class="flex-3item-1">
+						<p class="headline">業界</p>
+					</div>
+					<div class="flex-3item-2">
+						<input class="updateinput" type="text">
+					</div>
+				</div>
+				<div class="flex-3item flex-container">
+					<div class="flex-3item-1">
+						<p class="headline">案件期間<span class="errorMessage">※</span></p>
+					</div>
+					<div class="flex-3item-2">
+						<p><input class="inputDay" type="date"><span>&nbsp;~</span>
+							<input class="inputDay" type="date"></p>
+					</div>
+				</div>
+				<div class="flex-3item flex-container">
+					<div class="flex-3item-1">
+						<p class="headline">チーム人数</p>
+					</div>
+					<div class="flex-3item-2">
+						<input type="text"><span>&emsp;人</span>
+					</div>
+				</div>
+				<div class="flex-3item flex-container">
+					<div class="flex-3item-1">
+						<p class="headline" >ポジション</p>
+					</div>
+					<div class="flex-3item-2">
+						<select class="updateselect">
+							<option value=""></option>
+							<option value="">メンバー</option>
+							<option value="">サブリーダー</option>
+							<option value="">リーダー</option>
+							<option value="">プロジェクトマネージャー</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div id="mask" class="hidden"></div>
+
+				<div class="flex-container leftmargin">
+					<div class="flex-2item-1">
+						<p class="headline widthfaze">担当フェーズ</p>
+					</div>
+
+					<div class="flex-2item-2">
+						<p id="re">下のボタンより選択してください</p>
+					</div>
+				</div>
+				<input class="defolt plusButton modalButton" id="open" type="button" value="選択する">
+					<section id="modal" class="hidden box">
+						<h3 class="center">担当フェーズ選択</h3>
+						<div id="modalclear" class="defolt plusButton pointer clearposition">クリア</div>
+						<div class="flex-container">
+							<div class="flex-3item">
+								<p>開発案件</p>
+								<input type="checkbox" name="checkboxfaze"  value="要件定義">要件定義<br>
+								<input type="checkbox" name="checkboxfaze"  value="基本設計">基本設計<br>
+								<input type="checkbox" name="checkboxfaze"  value="詳細設計">詳細設計<br>
+								<input type="checkbox" name="checkboxfaze"  value="製造">製造<br>
+								<input type="checkbox" name="checkboxfaze"  value="改修">改修<br>
+								<input type="checkbox" name="checkboxfaze"  value="単体テスト">単体テスト<br>
+								<input type="checkbox" name="checkboxfaze"  value="結合テスト">結合テスト<br>
+								<input type="checkbox" name="checkboxfaze"  value="テスト実行">テスト実行<br>
+								<input type="checkbox" name="checkboxfaze"  value="テスト設計">テスト設計<br>
+								<input type="checkbox" name="checkboxfaze"  value="システムテスト">システムテスト<br>
+								<input type="checkbox" name="checkboxfaze"  value="運用">運用<br>
+								<input type="checkbox" name="checkboxfaze"  value="保守">保守<br>
+							</div>
+							<div class="flex-3item">
+								<p>インフラ案件</p>
+								<input type="checkbox" name="checkboxfaze" value="提案">提案<br>
+								<input type="checkbox" name="checkboxfaze"  value="要件定義">要件定義<br>
+								<input type="checkbox" name="checkboxfaze"  value="基本設計">基本設計<br>
+								<input type="checkbox" name="checkboxfaze"  value="詳細設計">詳細設計<br>
+								<input type="checkbox" name="checkboxfaze"  value="構築">構築<br>
+								<input type="checkbox" name="checkboxfaze" value="テスト">テスト<br>
+								<input type="checkbox" name="checkboxfaze"  value="移行">移行<br>
+								<input type="checkbox" name="checkboxfaze"  value="運用">運用<br>
+								<input type="checkbox" name="checkboxfaze"  value="保守">保守<br>
+								<input type="checkbox" name="checkboxfaze"  value="監視">監視<br>
+							</div>
+							<div class="flex-3item">
+								<p>検証案件</p>
+								<input type="checkbox" name="checkboxfaze"  value="テスト計画">テスト計画<br>
+								<input type="checkbox" name="checkboxfaze"  value="テスト管理">テスト管理<br>
+								<input type="checkbox" name="checkboxfaze"  value="テスト設計">テスト設計<br>
+								<input type="checkbox" name="checkboxfaze"  value="テスト実行">テスト実行<br>
+								<p>ロー案件</p>
+								<input type="checkbox" name="checkboxfaze" value="運用/監視">運用/監視<br>
+								<input type="checkbox" name="checkboxfaze"  value="保守">保守<br>
+								<input type="checkbox" name="checkboxfaze"  value="テスト実行">テスト実行<br>
+							</div>
+						</div>
+					<div id="ok" class="defolt plusButton right pointer">確定</div>
+					<div id="close" class="defolt plusButton right pointer">閉じる</div>
+				</section>
+			<p class="headline leftmargin">業務内容</p>
+			<textarea class="leftmargin" rows="10"></textarea></div>
+
+			<div class="flex-container leftmargin">
+				<div class="flex-2item flex-container">
+					<div class="flex-2item-1">
+						<p class="headline">DB</p>
+					</div>
+					<div class="flex-2item-2">
+						<p><select>
+							<option value="">指定なし</option>
+							<option value="">種類1</option>
+							<option value="">種類2</option>
+							<option value="">種類3</option>
+							<option value="">種類4</option>
+						</select>
+						<input class="inputskill" type="text" placeholder="バージョン">
+						<input class="defolt plusButton add_db relative add" type="button" value="追加" ></p>
+						<p><input  class="inputskill" type="text" placeholder="DB入力">
+							<input class="inputskill" type="text" placeholder="バージョン">
+							<input class="defolt plusButton add_db2 relative add" type="button" value="追加" ></p>
+					</div>
+				</div>
+				<div class="flex-2item flex-container">
+					<div class="flex-2item-1">
+						<p class="headline">FW/NW</p>
+					</div>
+					<div class="flex-2item-2">
+						<p><input class="inputskill" type="text" placeholder="FW/NW入力">
+						<input class="inputskill" type="text" placeholder="バージョン">
+						<input class="defolt plusButton add_fw relative add" type="button" value="追加"></p>
+					</div>
+				</div>
+				<div class="flex-2item flex-container">
+					<div class="flex-2item-1">
+						<p class="headline">OS</p>
+					</div>
+					<div class="flex-2item-2">
+						<p><select>
+							<option value="">指定なし</option>
+							<option value="">種類1</option>
+							<option value="">種類2</option>
+							<option value="">種類3</option>
+							<option value="">種類4</option>
+						</select>
+						<input class="inputskill" type="text" placeholder="バージョン">
+						<input class="defolt plusButton add_os relative add" type="button" value="追加"></p>
+						<p><input class="inputskill" type="text" placeholder="OS入力">
+							<input class="inputskill" type="text" placeholder="バージョン">
+							<input class="defolt plusButton add_os2 relative add" type="button" value="追加" ></p>
+					</div>
+				</div>
+				<div class="flex-2item flex-container">
+					<div class="flex-2item-1">
+						<p class="headline">言語</p>
+					</div>
+					<div class="flex-2item-2">
+						<p><select>
+							<option value="">指定なし</option>
+							<option value="">種類1</option>
+							<option value="">種類2</option>
+							<option value="">種類3</option>
+							<option value="">種類4</option>
+						</select>
+						<input class="inputskill" type="text" placeholder="バージョン">
+						<input class="defolt plusButton add_la relative add" type="button" value="追加" ></p>
+						<p><input class="inputskill" type="text" placeholder="言語入力">
+							<input class="inputskill" type="text" placeholder="バージョン">
+							<input class="defolt plusButton add_la2 relative add" type="button" value="追加" ></p>
+					</div>
+				</div>
+				<div class="flex-2item flex-container">
+					<div class="flex-2item-1">
+						<p class="headline">その他</p>
+					</div>
+					<div class="flex-2item-2">
+						<p><input class="inputskill" type="text" placeholder="その他入力">
+							<input class="inputskill" type="text" placeholder="バージョン">
+							<input class="defolt plusButton add_ot relative add" type="button" value="追加" ></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="centerbox">
+		   	<div class="lineup">
+				<input type="submit" value="登録" class="submitButton defolt bottomwidth width">
+			</div>
+		    <div class="lineup">
+				<input type="button" onclick="history.back()" value="戻る" class="backButton defolt bottomwidth width">
+			</div>
+		</div>
+	</form>
+
+	</main>
+  <script type="text/javascript" src="js/skillsheet.js"></script>
+</body>
+</html>

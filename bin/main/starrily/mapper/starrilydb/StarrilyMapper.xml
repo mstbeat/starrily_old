@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="starrily.mapper.starrilydb.StarrilyMapper">
+
+<!--DB情報検索-->
+<select id="searchProjectDB" parameterType="starrily.bean.SkillSheet" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SUD.User_id As userId
+        ,SDI.Db AS db
+        ,SDI.Db_ver AS dbVer
+        ,SDI.Db_period AS dbPeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyDBInfo SDI
+   ON
+        SUD.Career_id = SDI.Career_id
+    WHERE
+        SUD.Delete_flg = '0'
+        <if test = "db != null"></if>
+        AND SDI.Db = #{db}
+        <if test = "dbVer != null"></if>
+        AND SDI.Db_ver LIKE #{dbVer}'%'
+        <if test = "dbPeriod != null and !dbPeriod.equals('一年未満')"></if>
+        AND SDI.Db_period >= #{dbPeriod}
+        <if test = "dbPeriod != null and dbPeriod.equals('一年未満')"></if>
+        AND SDI.Db_period = #{dbPeriod}
+</select>
+
+<!--FW/NW情報検索-->
+<select id="searchProjectFWNW" parameterType="starrily.bean.SkillSheet" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SUD.User_id As userId
+        ,SFI.Fw_nw AS fwNw
+        ,SFI.Fw_nw_ver AS fwNwVer
+        ,SFI.Fw_nw_period AS fwNwPeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyFwNwInfo SFI
+   ON
+        SUD.Career_id = SFI.Career_id
+   WHERE
+        SUD.Delete_flg = '0'
+        <if test = "fwNw != null"></if>
+        AND SFI.Fw_nw = #{fwNw}
+        <if test = "Fw_nw_ver != null"></if>
+        AND SFI.Fw_nw_ver LIKE #{fwNwVer}'%'
+        <if test = "fwNwPeriod != null and !fwNwPeriod.equals('一年未満')"></if>
+        AND SFI.Fw_nw_period >= #{fwNwPeriod}
+        <if test = "fwNwPeriod != null and fwNwPeriod.equals('一年未満')"></if>
+        AND SFI.Fw_nw_period = #{fwNwPeriod}
+</select>
+
+<!--OS情報検索-->
+<select id="searchProjectOS" parameterType="starrily.bean.SkillSheet" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SUD.User_id As userId
+        ,SOI.Os AS os
+        ,SOI.Os_ver AS osVer
+        ,SOI.Os_period AS osPeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyOSInfo SOI
+   ON
+        SUD.Career_id = SOI.Career_id
+   WHERE
+        SUD.Delete_flg = '0'
+        <if test = "os != null"></if>
+        AND SOI.Os = #{os}
+        <if test = "osVer != null"></if>
+        AND SOI.Os_ver LIKE #{osVer}'%'
+        <if test = "osPeriod != null and !osPeriod.equals('一年未満')"></if>
+        AND SOI.Os_period >= #{osPeriod}
+        <if test = "osPeriod != null and osPeriod.equals('一年未満')"></if>
+        AND SOI.Os_period = #{osPeriod}
+</select>
+
+<!--言語情報検索-->
+<select id="searchProjectLang" parameterType="starrily.bean.SkillSheet" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SUD.User_id As userId
+        ,SLI.Language AS language
+        ,SLI.Language_ver AS languageVer
+        ,SLI.Language_period AS languagePeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyLanguageInfo SLI
+   ON
+        SUD.Career_id = SLI.Career_id
+    WHERE
+        SUD.Delete_flg = '0'
+        <if test = "language != null"></if>
+        AND SLI.Language = #{language}
+        <if test = "languageVer != null"></if>
+        AND SLI.Language_ver LIKE #{languageVer}'%'
+        <if test = "languagePeriod != null and !languagePeriod.equals('一年未満')"></if>
+        AND SLI.Language_period >= #{languagePeriod}
+        <if test = "languagePeriod != null and languagePeriod.equals('一年未満')"></if>
+        AND SLI.Language_period = #{languagePeriod}
+</select>
+
+<!--その他情報検索-->
+<select id="searchProjectOther" parameterType="starrily.bean.SkillSheet" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SUD.User_id AS userId
+        ,SOI.Other AS other
+        ,SOI.Other_ver AS otherVer
+        ,SOI.Other_period AS otherPeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyOtherInfo SOI
+   ON
+        SUD.Career_id = SOI.Career_id
+    WHERE
+        SUD.Delete_flg = '0'
+        <if test = "other != null"></if>
+        AND SOI.Other = #{other}
+        <if test = "otherVer != null"></if>
+        AND SOI.Other_ver LIKE #{otherVer}
+        <if test = "otherPeriod != null and !otherPeriod.equals('一年未満')"></if>
+        AND SOI.Other_period >= #{otherPeriod}
+        <if test = "otherPeriod != null and otherPeriod.equals('一年未満')"></if>
+        AND SOI.Other_period = #{otherPeriod}
+</select>
+
+<!--案件基本情報取得-->
+<select id="searchProject" parameterType="starrily.bean.SkillSheet" resultType="starrily.bean.SkillSheet">
+    SELECT
+        User_id AS userId
+        ,Industry AS industry
+        ,Position AS position
+        ,Charge_phase AS chargePhase
+   FROM
+        StarrilyUserDetailInfo
+    WHERE
+        Delete_flg = '0'
+        <if test = "industry != null"></if>
+        AND Industry LIKE '%'#{industry}'%'
+        <if test = "position != null"></if>
+        AND Position = #{position}
+        <if test = "chargePhase != null"></if>
+        AND Charge_phase IN (#{chargePhase})
+</select>
+
+<!--基本情報取得-->
+<select id="getSkillSheetBasic" parameterType="String" resultType="starrily.bean.SkillSheet">
+    SELECT
+        UI.User_name AS userName
+        ,UI.User_phonetic AS userPhonetic
+        ,SUB.User_initial_name AS userInitialName
+        ,SUB.User_sex AS userSex
+        ,SUB.User_birthday AS userBirthday
+        ,SUB.User_final_education AS userFinalEducation
+        ,SUB.User_address AS userAddress
+        ,SUB.User_station_line AS userStationLine
+        ,SUB.User_station AS userStation
+        ,SUB.User_appeal AS userAppeal
+        ,SUB.User_certification AS userCertification
+        ,SUB.User_remarks AS userRemarks
+        ,SUB.Update_date AS updateDate
+   FROM
+        StarrilyUserInfo UI
+   JOIN
+        StarrilyUserBasicInfo SUB
+   ON
+        UI.User_id = SUB.User_id
+   WHERE
+        UI.User_id= #{userId}
+        AND UI.Delete_flg = '0'
+</select>
+
+<!--案件基本情報取得-->
+<select id="getProjectAll" parameterType="String" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SUD.Career_id AS careerId
+        ,SUD.Start_date AS startDate
+        ,SUD.Finish_date AS finishDate
+        ,SUD.Period_date AS periodDate
+        ,SUD.Business_name AS businessName
+        ,SUD.Industry AS industry
+        ,SUD.Teams_number AS teamNumber
+        ,SUD.Position AS position
+        ,SUD.Charge_phase AS chargePhase
+        ,SUD.Business_content AS businessContent
+        ,SUD.Update_date AS updateDate
+   FROM
+        StarrilyUserInfo UI
+   JOIN
+        StarrilyUserDetailInfo SUD
+   ON
+        UI.User_id = SUD.User_id
+    WHERE
+        UI.User_id= #{userId}
+        AND UI.Delete_flg = '0'
+        AND SUD.Delete_flg = '0'
+</select>
+
+<!--案件基本取得-->
+<select id="getProject" parameterType="starrily.bean.SkillSheet" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SUD.Career_id AS careerId
+        ,SUD.Start_date AS startDate
+        ,SUD.Finish_date AS finishDate
+        ,SUD.Period_date AS periodDate
+        ,SUD.Business_name AS businessName
+        ,SUD.Industry AS industry
+        ,SUD.Teams_number AS teamNumber
+        ,SUD.Position AS position
+        ,SUD.Charge_phase AS chargePhase
+        ,SUD.Business_content AS businessContent
+        ,SUD.Update_date AS updateDate
+   FROM
+        StarrilyUserInfo UI
+   JOIN
+        StarrilyUserDetailInfo SUD
+   ON
+        UI.User_id = SUD.User_id
+    WHERE
+        UI.User_id = #{userId}
+        AND SUD.Career_id = #{career_id}
+        AND UI.Delete_flg = '0'
+        AND SUD.Delete_flg = '0'
+</select>
+<!--DB情報取得-->
+<select id="getProjectDB" parameterType="String" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SDI.Career_id AS careerId
+        ,SDI.Db AS db
+        ,SDI.Db_ver AS dbVer
+        ,SDI.Db_period AS dbPeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyDBInfo SDI
+   ON
+        SUD.Career_id = SDI.Career_id
+    WHERE
+        SUD.Career_id in  (#{careerId})
+        AND SUD.Delete_flg = '0'
+</select>
+
+<!--FW/NW情報取得-->
+<select id="getProjectFwNw" parameterType="String" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SFI.Career_id AS careerId
+        ,SFI.Fw_nw AS fwNw
+        ,SFI.Fw_nw_ver AS fwNwVer
+        ,SFI.Fw_nw_period AS fwNwPeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyFwNwInfo SFI
+   ON
+        SUD.Career_id = SFI.Career_id
+    WHERE
+        SUD.Career_id in  (#{careerId})
+        AND SUD.Delete_flg = '0'
+</select>
+
+<!--OS情報取得-->
+<select id="getProjectOS" parameterType="String" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SOI.Career_id AS careerId
+        ,SOI.Os AS os
+        ,SOI.Os_ver AS osVer
+        ,SOI.Os_period AS osPeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyOSInfo SOI
+   ON
+        SUD.Career_id = SOI.Career_id
+    WHERE
+        SUD.Career_id in  (#{careerId})
+        AND SUD.Delete_flg = '0'
+</select>
+
+<!--言語情報取得-->
+<select id="getProjectLang" parameterType="String" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SLI.Career_id AS careerId
+        ,SLI.Language AS language
+        ,SLI.Language_ver AS languageVer
+        ,SLI.Language_period AS languagePeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyLanguageInfo SLI
+   ON
+        SUD.Career_id = SLI.Career_id
+    WHERE
+        SUD.Career_id in  (#{careerId})
+        AND SUD.Delete_flg = '0'
+</select>
+
+<!--その他情報取得-->
+<select id="getProjectOther" parameterType="String" resultType="starrily.bean.SkillSheet">
+    SELECT
+        SOI.Career_id AS careerId
+        ,SOI.Other AS other
+        ,SOI.Other_ver AS otherVer
+        ,SOI.Other_period AS otherPeriod
+   FROM
+        StarrilyUserDetailInfo SUD
+   JOIN
+        StarrilyOtherInfo SOI
+   ON
+        SUD.Career_id = SOI.Career_id
+    WHERE
+        SUD.Career_id in  (#{careerId})
+        AND SUD.Delete_flg = '0'
+</select>
+
+<!--基本情報登録-->
+<insert id="insertBasicInformation" parameterType="starrily.bean.SkillSheet">
+    INSERT INTO StarrilyUserBasicInfo(
+        User_Id
+        ,User_initial_name
+        ,User_sex
+        ,User_birthday
+        ,User_final_education
+        ,User_address
+        ,User_station_line
+        ,User_station
+        ,User_appeal
+        ,User_certification
+        ,User_remarks
+        ,Registered_date
+        ,Update_date
+    )VALUES(
+        #{userId},
+        #{userInitialName},
+        #{userSex},
+        #{userBirthday},
+        #{userFinalEducation},
+        #{userAddress},
+        #{userStationLine},
+        #{userStation},
+        #{userAppeal},
+        #{userCertification},
+        #{userRemarks},
+        CURRENT_TIMESTAMP(),
+        CURRENT_TIMESTAMP())
+    ON DUPLICATE KEY UPDATE
+        User_initial_name = #{userInitialName},
+        User_sex = #{userSex},
+        User_birthday = #{userBirthday},
+        User_final_education = #{userFinalEducation},
+        User_address = #{userAddress},
+        User_station_line = #{userStationLine},
+        User_station = #{userStation},
+        User_appeal = #{userAppeal},
+        User_certification = #{userCertification},
+        User_remarks = #{userRemarks},
+        Update_date = CURRENT_TIMESTAMP()
+</insert>
+
+<!--案件基本情報更新-->
+<update id="updateProject" parameterType="starrily.bean.SkillSheet">
+    UPDATE
+        StarrilyUserDetailInfo
+    SET
+        User_id = #{userId},
+        Start_date = #{startDate},
+        Finish_date = #{finishDate},
+        Period_date = #{periodDate},
+        Business_name = #{businessName},
+        Industry = #{Industry},
+        Teams_number = #{teamNumber},
+        Position = #{Position},
+        Charge_phase = #{chargePhase},
+        Business_content = #{businessContent},
+        Update_date = CURRENT_TIMESTAMP()
+    WHERE
+        Career_id= #{careerId}
+        AND Delete_flg = '0'
+        AND Update_date <![CDATA[ <= ]]> #{updateDate}
+</update>
+
+<!--案件基本情報登録-->
+<insert id="insertProject" parameterType="starrily.bean.SkillSheet">
+    INSERT INTO StarrilyUserDetailInfo(
+        User_id,
+        Start_date,
+        Finish_date,
+        Period_date,
+        Business_name,
+        Industry,
+        Teams_number,
+        Position,
+        Charge_phase,
+        Business_content,
+        Registered_date,
+        Update_date
+    )VALUES(
+        #{userId},
+        #{startDate},
+        #{finishDate},
+        #{periodDate},
+        #{businessName},
+        #{Industry},
+        #{teamNumber},
+        #{Position},
+        #{chargePhase},
+        #{businessContent}
+        CURRENT_TIMESTAMP(),
+        CURRENT_TIMESTAMP())
+</insert>
+
+<!--DB情報登録-->
+<insert id="insertProjectDB" parameterType="starrily.bean.SkillSheet">
+    INSERT INTO starrilyDBInfo(
+        Career_id,
+        Db,
+        Db_ver,
+        Db_period
+   )VALUES(
+        #{careerId},
+        #{db},
+        #{dbVer},
+        #{dbPeriod})
+</insert>
+
+<!--FW/NW情報登録-->
+<insert id="insertProjectFWNW" parameterType="starrily.bean.SkillSheet">
+    INSERT INTO starrilyFwNwInfo(
+        Career_id,
+        Fw_nw,
+        Fw_nw_ver,
+        Fw_nw_Period
+   )VALUES(
+        #{careerId},
+        #{fwNw},
+        #{fwNwVer},
+        #{fwNwPeriod})
+</insert>
+
+<!--OS情報登録-->
+<insert id="insertProjectOS" parameterType="starrily.bean.SkillSheet">
+    INSERT INTO starrilyOSInfo(
+        Career_id,
+        Os,
+        Os_ver,
+        Os_period
+   )VALUES(
+        #{careerId},
+        #{os},
+        #{osVer},
+        #{osPeriod})
+</insert>
+
+<!--言語情報登録-->
+<insert id="insertProjectLang" parameterType="starrily.bean.SkillSheet">
+    INSERT INTO starrilyLanguageInfo(
+        Career_id,
+        language,
+        language_ver,
+        language_period
+   )VALUES(
+        #{careerId},
+        #{language},
+        #{languageVer},
+        #{languagePeriod})
+</insert>
+
+<!--その他情報登録-->
+<insert id="insertProjectOther" parameterType="starrily.bean.SkillSheet">
+    INSERT INTO starrilyOtherInfo(
+        Career_id,
+        Other,
+        Other_ver,
+        Other_period
+   )VALUES(
+        #{careerId},
+        #{other},
+        #{otherVer},
+        #{otherPeriod})
+</insert>
+
+<!--案件経歴情報削除-->
+<delete id="deleteProjectItems" parameterType="starrily.bean.SkillSheet">
+    DELETE
+        SLI,
+        SDI,
+        SFI,
+        SOI,
+        SOTI
+   FROM
+        StarrilyUserDetailInfo SUD
+   LEFT JOIN
+        StarrilyLanguageInfo SLI
+   ON
+        SUD.Career_id = SLI.Career_id
+   LEFT JOIN
+        StarrilyDBInfo SDI
+   ON
+        SUD.Career_id = SDI.Career_id
+   LEFT JOIN
+        StarrilyFwNwInfo SFI
+   ON
+        SUD.Career_id = SFI.Career_id
+   LEFT JOIN
+        StarrilyOSInfo SOI
+   ON
+        SUD.Career_id = SOI.Career_id
+   LEFT JOIN
+        StarrilyOtherInfo SOTI
+   ON
+        SUD.Career_id = SOTI.Career_id
+    WHERE
+        SUD.Career_id= #{careerId}
+        AND SUD.Delete_flg = '0'
+        AND SUD.Update_date <![CDATA[ <= ]]> #{updateDate}
+</delete>
+
+<!--案件削除-->
+<update id="deleteSkillSheetProject" parameterType="starrily.bean.SkillSheet">
+    UPDATE
+        StarrilyUserDetailInfo
+    SET
+        Delete_flg = '1',
+        Update_date = CURRENT_TIMESTAMP()
+    WHERE
+        Career_id = #{careerId}
+        AND User_id = #{userId}
+        AND Update_date <![CDATA[ <= ]]> #{updateDate}
+</update>
+
+<!--ユーザー情報登録-->
+<insert id="insertUserInformation" parameterType="starrily.bean.UserInformation">
+    INSERT IGNORE INTO StarrilyUserInfo(
+        User_mail,
+        User_name,
+        User_phonetic,
+        User_last_login,
+        Registered_date,
+        Update_date
+   )SELECT
+        #{userMail},
+        #{userName},
+        #{userPhonetic},
+        CURRENT_TIMESTAMP(),
+        CURRENT_TIMESTAMP(),
+        CURRENT_TIMESTAMP()
+    AS TMP
+    WHERE NOT EXISTS(
+    SELECT * FROM StarrilyUserInfo
+    WHERE
+        User_mail = #{userMail})
+</insert>
+
+<!--ユーザー情報更新-->
+<update id="updateUserInformation" parameterType="starrily.bean.UserInformation">
+    UPDATE
+        StarrilyUserInfo
+    SET
+        User_mail = #{userMail},
+        User_name = #{userName},
+        User_phonetic = #{userPhonetic},
+        Update_date = CURRENT_TIMESTAMP()
+    WHERE
+        User_id= #{userId}
+        AND Delete_flg = '0'
+        AND Update_date <![CDATA[ <= ]]> #{updateDate}
+</update>
+
+<!--ユーザー情報削除-->
+<update id="deleteUserInformation" parameterType="starrily.bean.UserInformation">
+    UPDATE
+        StarrilyUserInfo
+    SET
+        Delete_flg = '1',
+        Update_date = CURRENT_TIMESTAMP()
+    WHERE
+        User_id = #{userId}
+        AND Update_date <![CDATA[ <= ]]> #{updateDate}
+</update>
+
+<!--スキルプルダウンDB情報取得-->
+<select id="getPulldownProjectDB" resultType="starrily.bean.SkillSheet">
+    SELECT DISTINCT
+        Db AS db
+   FROM
+        StarrilyDBInfo
+   ORDER BY Db ASC
+</select>
+
+<!--スキルプルダウンFW/NW情報取得-->
+<select id="getPulldownProjectFWNW" resultType="starrily.bean.SkillSheet">
+    SELECT DISTINCT
+        Fw_nw AS fwNw
+   FROM
+        StarrilyFwNwInfo
+   ORDER BY Fw_nw ASC
+</select>
+
+<!--スキルプルダウンOS情報取得-->
+<select id="getPulldownProjectOS" resultType="starrily.bean.SkillSheet">
+    SELECT DISTINCT
+        Os AS os
+   FROM
+        StarrilyOSInfo
+   ORDER BY Os ASC
+</select>
+
+<!--スキルプルダウン言語情報取得-->
+<select id="getPulldownProjectLang" resultType="starrily.bean.SkillSheet">
+    SELECT DISTINCT
+        Language AS language
+   FROM
+        StarrilyLanguageInfo
+   ORDER BY Language ASC
+</select>
+
+<!--スキルプルダウンその他情報取得-->
+<select id="getPulldownProjectOther" resultType="starrily.bean.SkillSheet">
+    SELECT DISTINCT
+        Other AS other
+   FROM
+        StarrilyOtherInfo SOI
+   ORDER BY Other ASC
+</select>
+</mapper>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/login.css}">
+<script type="text/javascript" th:src="@{/js/skillsheet.js}"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="body"></div>
+	<div class="grad">
+		<div class="header">
+			<div><img th:src="@{/img/logo.png}" alt="Starrily">
+				<p class="logo">スキルシート管理システム</p>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="login">
+		<form th:action="@{login}" th:method="get">
+			<p>パスワード変更用メールを送信しました。</p>
+			<p>もし、メールが届かない場合はメールアドレスの
+				<br>入力が間違いないことを確認した上で、
+				<br>担当営業へお問い合わせ下さい。
+				<br>
+			</p>
+			<input type="submit" id="submit-input" value="ログイン画面へ">
+		</form>
+	</div>
+</body>
+</html>

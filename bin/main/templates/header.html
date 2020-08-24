@@ -1,0 +1,34 @@
+
+	<div class="menu">
+	<div class="logospace">
+		<a th:href="@{http://localhost:8080/engineer_search}"><button class="logo"><span th:text="スキルシート管理システム"></span></button>
+		</a>
+	</div>
+	<div class="cp_navi">
+		<ul>
+			<li><div class="headerinput"><form th:action="@{engineer_search}" th:method="GET">
+				<input class="headerinputbuttom" type="submit" th:value="エンジニア検索">
+			</form></div></li>
+
+			<li><div><form th:action="@{skillsheet_reference}" th:method="post">
+				<input class="headerinputbuttom" type="submit" th:value="スキルシート参照">
+			</form></div></li>
+
+			<li class="headerother"><b class="span_color">その他</b><br><img class="sortimage"th:src="@{img/sort_d.png}">
+				<div class="cp_navi2">
+					<ul>
+						<li><div><form th:action="@{individual_password}" th:method="post">
+							<input class="headerinput2buttom" type="submit" th:value="パスワード変更">
+						</form></div></li>
+						<li><div><form th:action="@{user_management}" th:method="post">
+							<input class="headerinput2buttom" type="submit" th:value="ユーザー管理">
+						</form></div></li>
+					</ul>
+				</div>
+			</li>
+			<li><div class="headerinput"><form th:action="@{login}" th:method="post">
+				<input class="headerinputbuttom" type="submit" th:value="ログアウト">
+			</form></div></li>
+		</ul>
+	</div>
+</div>

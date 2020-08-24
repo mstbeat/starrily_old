@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="jp">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/unity.css">
+<link rel="stylesheet" type="text/css" href="css/costom.css">
+<title>スキルシートダウンロード</title>
+</head>
+<body>
+	<header th:insert="/header"></header>
+
+	<main>
+	<h1 class="pagetitle">スキルシートダウンロード</h1>
+
+	 <p class="systemMessage">
+	 <input type="button" onclick="history.back()" value="戻る" class="backButton defolt bottomwidth right rightmargin width">
+	</p>
+
+	<p class="systemMessage subtitle">ダウンロードしたいものをクリックしてください。</p>
+	<p class="errorMessage">エラーメッセージがここに入ります</p>
+	<div class="container flexbox">
+
+		<div class="flexitem" >
+			<div class="box">
+			 <div class="box-title">氏名（フルネーム）</div>
+					<form class="boxheightsize center" th:method="POST" th:action="@{/skillsheet_download}">
+					  <input class="submitButton defolt bottomsize width pdf" type="submit" value="PDF" />
+					</form>
+					<form class="boxheightsize center" th:method="POST" th:action="@{/skillsheet_download}">
+					  <input class="submitButton defolt bottomsize width" type="submit" value="Excel" />
+					</form>
+				</div>
+			</div>
+
+
+		<div class="flexitem" >
+			<div class="box">
+			 <div class="box-title">氏名（イニシャル）</div>
+				<form class="boxheightsize center" th:method="POST" th:action="@{/skillsheet_download}">
+				  <input class="submitButton defolt bottomsize width pdf" type="submit" value="PDF" />
+				</form>
+				<form class="boxheightsize center" th:method="POST" th:action="@{/skillsheet_download}">
+				  <input class="submitButton defolt bottomsize width" type="submit" value="Excel" />
+				</form>
+			</div>
+		</div>
+</div>
+<div>
+
+
+
+</div>
+
+</main>
+</body>
+</html>

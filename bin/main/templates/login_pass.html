@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/login.css}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="body"></div>
+	<div class="grad">
+		<div class="header">
+			<div><img th:src="@{/img/logo.png}" alt="Starrily">
+				<p class="logo">スキルシート管理システム</p>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="login">
+		<form th:action="@{login_pass_com}" th:method="post">
+			<p class="error_required" th:text="エラーメッセージが入ります"></p>
+			<p>自身のメールアドレスを入力してください。
+				<br>パスワード変更用のURLを送信します。
+			</p>
+			<input type="text" placeholder="メールアドレス" name="userId"><br>
+			<input type="submit" id="submit-input" value="送信">
+		</form>
+	</div>
+</body>
+</html>

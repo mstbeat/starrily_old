@@ -1,0 +1,514 @@
+@charset "UTF-8";
+/* 全画面共通のCSS */
+
+a { text-decoration:none }
+
+body{
+	margin: 0 auto;
+	min-width: 1200px;
+	margin: auto;
+}
+main{
+	min-width: 1200px;
+	max-width: 1400px;
+    margin: auto;
+}
+select{
+	height: 1.5rem;
+}
+.right{
+  float:right;
+}
+.left{
+  float:left;
+  padding-left: 10%;
+}
+.center{
+	text-align: center;
+	margin-top: 0px;
+}
+
+textarea{
+	resize: vertical;
+}
+
+
+/* タイトル装飾 */
+.pagetitle {
+	text-align: center;
+	font-size: 2rem;
+	 margin: 0 2%;
+	 color: #1e5799;/*文字色*/
+ border: solid 2px #1e5799;/*線色*/
+ padding: 0.2em;/*文字周りの余白*/
+ border-radius: 0.2em;/*角丸*/
+ box-shadow: 2px 2px;
+}
+.subtitle{
+ margin-top: 50px;
+}
+/* エラーメッセージ */
+.systemMessage {
+	margin-left: 5%;
+	margin-top: 3%;
+}
+.errorMessage {
+	color: #ff0000;
+	margin-left: 5%;
+	margin-top: 1%;
+}
+/* 必須コメント */
+.RequiredMessage{
+color: #ff0000;
+	font-size:0.8rem;
+	left: -8%;
+	top: -7px;
+	position: relative;
+}
+/* ヘッダー */
+.logo{
+		display: inline-block;
+	background-image: url(../img/logo.png);
+	background-repeat: no-repeat;
+    background-size: contain;
+    background-color: rgba(0,0,0,0);
+		border: 0;
+    outline: 0;
+	height: 60px;
+	cursor: pointer;
+cursor: hand;
+}
+.logospace{
+	padding: 15px;
+	display: inline-block;
+	margin-left: 1.5%;
+    margin-top: 5px;
+}
+header span{
+	position: relative;
+	top: 10px;
+	left: 120px;
+	font-size: 0.6rem;
+}
+
+
+
+
+.menu {
+	/* background-color: #f7fcff; */
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,bfe8f9+0,ffffff+4,ffffff+22,effdff+26,ffffff+31,9fd8ef+46,e4f5fc+77,bfe8f9+100 */
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  rgba(255,255,255,1) 0%, rgba(191,232,249,1) 0%, rgba(255,255,255,1) 4%, rgba(255,255,255,1) 22%, rgba(239,253,255,1) 26%, rgba(255,255,255,1) 31%, rgba(159,216,239,1) 46%, rgba(228,245,252,1) 77%, rgba(191,232,249,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(191,232,249,1) 0%,rgba(255,255,255,1) 4%,rgba(255,255,255,1) 22%,rgba(239,253,255,1) 26%,rgba(255,255,255,1) 31%,rgba(159,216,239,1) 46%,rgba(228,245,252,1) 77%,rgba(191,232,249,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg,  rgba(255,255,255,1) 0%,rgba(191,232,249,1) 0%,rgba(255,255,255,1) 4%,rgba(255,255,255,1) 22%,rgba(239,253,255,1) 26%,rgba(255,255,255,1) 31%,rgba(159,216,239,1) 46%,rgba(228,245,252,1) 77%,rgba(191,232,249,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bfe8f9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+	/* border-top: 1px solid #82d8f2;*/
+  border-bottom: 1px solid #82d8f2;
+	/* border: 1px solid #82d8f2; */
+	border-radius: 4px;
+	box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
+	color: #888888;
+	display: block;
+	margin-bottom:1em ;
+	overflow: hidden;
+	height: 90px;
+
+}
+.cp_navi{
+	float:right;
+}
+
+.cp_navi ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+		box-sizing: border-box;
+	-webkit-transition: all 0.2s;
+					transition: all 0.2s;
+}
+.cp_navi ul li ,.headerinput{
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+}
+.span_color{
+font-weight: bold;
+color: #324675;
+padding: 30px 20px;
+position: relative;
+top:35px;
+}
+
+.sortimage{
+position: relative;
+top:35px;
+}
+
+/* １段目設定 */
+.cp_navi > ul > li > a {
+	text-decoration: none;
+	color: #324675;
+	display: block;
+	font-weight: bold;
+}
+.headerother{
+	height: 95px;
+}
+.headerinputbuttom{
+	text-align: center;
+  font-size: 1.0em;
+  display: block;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  background-color: transparent;
+  color: #324675;
+  font-weight: bold;
+  height: 95px;
+  width: 180px;
+  margin:0 auto;
+  padding: 30px 20px;
+}
+/* 1段目ホバー */
+.cp_navi > ul > li:hover{
+	background-color:#f7fcff;
+}
+/* １段目文字色ホバー */
+.nonlink{
+	color: #324675;
+	font-weight: bold;
+	background-color:#f7fcff;
+}
+.nonlink2{
+	color: #324675;
+	font-weight: bold;
+	background-color:#f7fcff;
+	padding:12px 20px 15px 20px;
+	margin: 0 0 10px 0;
+}
+
+/* 2段目の設定 */
+.cp_navi2 {
+	background-color: #9fd8ef;
+	border-top: 0;
+	border-radius:4px;
+	display: none;
+	margin: 0;
+	/* 透明にする */
+	opacity: 0;
+	position: absolute;
+	top:90px;
+	width: 220px;
+	visibility: hidden;
+	-webkit-transiton: opacity 0.2s;
+	transition: opacity 0.2s;
+}
+.cp_navi > ul > li:hover > div {
+	display: block;
+	/* 2段目を表示する */
+	opacity: 1;
+	visibility: visible;
+}
+.cp_navi > ul > li > div ul > li {
+	display: block;
+	padding:10px 20px;
+}
+/* ２段目初期設定 */
+.headerinput2buttom {
+  text-align: center;
+  font-size: 1.0em;
+  display: block;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  background-color: transparent;
+  color: #324675;
+  font-weight: bold;
+  height: 70px;
+  width: 180px;
+  margin:0 auto;
+  padding: 25px 20px;
+}
+
+/* ２段目初期ホバー箱色 */
+.headerinput2buttom:hover{
+	background-color: #f7fcff;
+}
+
+
+
+/* button装飾 */
+.defolt{
+  display: inline-block;
+   padding: 0.5em 1em;
+   text-decoration: none;
+   border-radius: 3px;
+   	margin-right: 2%;
+    text-align: center;
+    font-weight: bold;
+	border: solid 0.5px #3b388c;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+	cursor: pointer;
+	cursor: hand;
+}
+.nonhoverdefolt{
+  display: inline-block;
+   padding: 0.5em 1em;
+   text-decoration: none;
+   border-radius: 3px;
+   	margin-right: 2%;
+    text-align: center;
+    font-weight: bold;
+		border: solid 0.5px #3b388c;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+}
+
+
+/* 下線ホバー */
+.defolt:after {
+	content: '';
+	width: 0;
+	transition: all 0.5s ease;
+
+	display: block;
+  background-color:#d8d8d8;
+}
+.defolt:active {
+ -webkit-transform: translateY(4px);
+ transform: translateY(4px);
+ box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+ border-bottom: none;
+ border: solid 0.5px #5e7fca;
+}
+
+/* ×ボタン */
+.centerbox{
+	text-align: center;
+}
+.lineup{
+	display: inline-block;
+	margin: 40px 100px 0 100px;
+}
+.bottomwidth{
+	width: 3rem;
+}
+
+.backButton {
+ padding: 8px 35px;
+ color: #fff;
+ background-color: #5e7fca;
+}
+
+.submitButton{
+ padding: 8px 35px;
+ color: #324675;
+ background-color: #ffffad;
+}
+
+
+.clearButton{
+ width:5rem;
+ color: #fff;
+ background-color: #696a72;
+ padding: 10px;
+}
+
+.plusButton{
+	width: 3.5rem;
+	margin-right: 50px;
+  padding: 0px;
+	background-color: #e4f5fc;
+}
+.changeButton{
+	width: 7rem;
+  padding: 0px;
+	background-color: #e4f5fc;
+}
+
+
+.plusfwButton{
+	width: 3.5rem;
+	margin-right: 50px;
+  padding: 0px;
+	background-color: #e4f5fc;
+    margin-right: 210px;
+}
+.bottomsize{
+	width: 4rem;
+}
+.backglay{
+	background-color: #696a72;
+	color:#fff;
+	width: 3.5rem;
+	padding: 0px;
+}
+.backyellow{
+	background-color: #ffffad;
+}
+.add{
+ color: #fff;
+ background-color: #696a72;
+ border: solid 0.5px #696a72;
+}
+
+/*基本情報更新画面,案件追加,案件更新,スキルシートダウンロード画面,
+パスワード変更画面、ユーザーパスワード変更完了画面(更新,送信,戻るボタン)css */
+.width {
+	width: auto;
+	padding:10px 40px;
+}
+
+
+.del{
+	color: red;
+	background-image: url(../img/del.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	border: none;
+	width: auto;
+	height: 17px;
+	border-top: 5px solid #fff;
+}
+
+/* テーブル囲み */
+.box {
+    position: relative;
+    margin: 6% 2% 1% 2%;
+    padding: 1rem 0;
+    border: solid 3px #2569bc;
+    border-radius: 8px;
+}
+.box .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 1.7rem;
+    background: #FFF;
+    color: #2569bc;
+    font-weight: bold;
+}
+
+
+/* 親要素(コンテナ) */
+.flex-container {
+	display              : -webkit-box;   /* old Android */
+	display              : -webkit-flex;  /* Safari etc. */
+	display              : -ms-flexbox;   /* IE10        */
+	display              : flex;
+	align-content: flex-start;
+  -webkit-flex-wrap: wrap;          /* Safari etc. */
+  -ms-flex-wrap    : wrap;          /* IE10        */
+  flex-wrap        : wrap;
+  justify-content:flex-start;
+  align-content:flex-start;
+  width: 100%;
+}
+/* 子要素(アイテム) */
+
+.flex-2item{
+	width: 50%;
+}
+.flex-center{
+    width: 1000px;
+    margin: 0 auto;
+    padding-left: 11%;
+}
+.flex-2item-1{
+	width: 13%;
+}
+.flex-2item-2{
+	width: 87%;
+}
+.flex-3item {
+	margin: 0px 0px 0px 20px;
+	width: 30%;
+}
+.flex-3item-1 {
+	margin: 0px 0px 20px 0px;
+	width: 22%;
+}
+.flex-3item-2 {
+	margin: 0px 0px 0px 0px;
+	width: 78%;
+}
+.flex-4item {
+	margin: 0px 0px 0px 0px;
+	width: 25%;
+}
+.flex-4item-1 {
+	margin: 0px 0px 0px 0px;
+	width: 30%;
+}
+.flex-4item-2 {
+	margin: 0px 0px 0px 0px;
+	width: 70%;
+}
+
+
+
+/* 共通あきはば */
+.leftmargin{
+	margin-left: 20px;
+}
+.rightmargin{
+	margin-right: 6.4%;
+}
+.bottommargin{
+	margin-bottom: 20px;
+}
+.bottomspace{
+	padding: 45px 0 0 0;
+}
+
+.top0{
+	margin-top: 0;
+
+}
+.bottom0{
+	margin-bottom: 0;
+}
+
+.relative{
+  position: relative;
+  top: -3px;
+  left: 10px;
+}
+.rightrelative{
+	position: relative;
+	right: 0.5%;
+    float: right;
+}
+.rightrightrelative{
+	position: relative;
+	right: -50%;
+}
+
+.delrelative{
+	position: relative;
+	left: 17px;
+	top:3px;
+  }
+
+/* 注意書き文字 */
+.attention{
+	font-size: 0.7rem;
+	margin-left: 10px;
+}
+.attention2{
+	top: 43px;
+    left: 42%;
+	position: relative;
+	margin:0;
+	padding:0;
+}
+
+
+/* スキルシートダウンロード画面 PDFボタンのcss*/
+.pdf {
+	padding:10px 45px;
+}
+

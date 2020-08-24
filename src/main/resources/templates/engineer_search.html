@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/unity.css}">
+<link rel="stylesheet" th:href="@{/css/engineer.css}">
+<script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/skillsheet.js}" charset="UTF-8"></script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:insert="/header"></header>
+<main>
+	<form class="starBody" th:action="@{engineer_list}" th:method="post">
+		<h1 class="pagetitle" th:text="エンジニア検索"></h1>
+		<p class="errorMessage" th:text="エラーメッセージがここに入ります"></p>
+		<input type="submit" class="submitButton right defolt" th:value="検索">
+		<!-- <input type="submit" value="検索" class="searchButton"> -->
+		<button type="button" id="clear" class="clearButton right defolt">クリア</button>
+	<div class="box">
+		<div class="box-title">基本情報検索</div>
+    	<div class="flex-container">
+			<div class="flex-3item">
+				<p class="bottom0"><span>氏名&emsp;&emsp;</span>
+				<span><input class="skillSearchbox inputwidth" type="text"></span></p>
+				<p class="top0 attention">※ひらがな部分一致検索</p>
+			</div>
+			<div class="flex-3item">
+				<p><span>会社名&emsp;&emsp;</span>
+				<span><select class="selectwidth skillSearchbox">
+					<option value="">指定なし</option>
+					<option value="">プラウドグループ</option>
+					<option value="">セキュアズグループ</option>
+					<option value="">ライズグループ</option>
+				</select></span></p>
+			</div>
+			<div class="flex-3item"></div>
+			<div class="flex-3item">
+				<p>事業部&emsp;
+				<span><select class="selectwidth skillSearchbox">
+					<option value="">指定なし</option>
+					<option value="">開発事業部</option>
+					<option value="">NW/インフラ事業部</option>
+					<option value="">検証事業部</option>
+				</select></span></p>
+			</div>
+			<div class="flex-3item">
+				<p class="bottom0">担当営業&emsp;
+				<span><input class="skillSearchbox inputwidth" type="text"></span></p>
+				<p class="top0 attention">※ひらがな部分一致検索</p>
+			</div>
+			<div class="flex-3item">
+				<p>稼働状況
+				<span><select class="selectwidth skillSearchbox">
+					<option value="">指定なし</option>
+					<option value="">提案可能</option>
+					<option value="">提案不可</option></select></span></p>
+			</div>
+		</div>
+	</div>
+	<div class="detailSearchBody box">
+		<div class="box-title">詳細情報検索</div>
+		<div id="mask" class="hidden"></div>
+		<div class="flex-container">
+			<div class="flex-3item">
+				<p class="bottom0">業界&emsp;&emsp;
+				<span><input class="skillSearchbox inputwidth" type="text"></span></p>
+				<p class="top0 bottom0 attention">※前後部分一致検索</p>
+			</div>
+		<div class="flex-3item">
+			<p>ポジション
+			<span><select class="selectwidth skillSearchbox">
+				<option value="">指定なし</option>
+				<option value="">メンバー</option>
+					<option value="">サブリーダー</option>
+					<option value="">リーダー</option>
+					<option value="">プロジェクトマネージャー</option></select>
+			</span></p>
+		</div>
+	</div>
+	<div class="container">
+		<div class="containeritem">
+			<p class="skillTitle">担当フェーズ</p>
+		</div>
+
+		<div class="containeritem">
+			<p id="re">下のボタンより選択してください</p>
+		</div>
+	</div>
+
+	<input class="defolt plusButton modalButton" id="open" type="button" value="選択する">
+
+	<section id="modal" class="hidden box">
+		<h3 class="center">担当フェーズ選択</h3>
+		<div id="modalclear" class="defolt plusButton pointer clearposition">クリア</div>
+		<div class="flex-container">
+			<div class="flex-3item">
+				<p>開発案件</p>
+					<input type="checkbox" name="checkboxfaze"  value="要件定義">要件定義<br>
+					<input type="checkbox" name="checkboxfaze"  value="基本設計">基本設計<br>
+					<input type="checkbox" name="checkboxfaze"  value="詳細設計">詳細設計<br>
+					<input type="checkbox" name="checkboxfaze"  value="製造">製造<br>
+					<input type="checkbox" name="checkboxfaze"  value="改修">改修<br>
+					<input type="checkbox" name="checkboxfaze"  value="単体テスト">単体テスト<br>
+					<input type="checkbox" name="checkboxfaze"  value="結合テスト">結合テスト<br>
+					<input type="checkbox" name="checkboxfaze"  value="テスト実行">テスト実行<br>
+					<input type="checkbox" name="checkboxfaze"  value="テスト設計">テスト設計<br>
+					<input type="checkbox" name="checkboxfaze"  value="システムテスト">システムテスト<br>
+					<input type="checkbox" name="checkboxfaze"  value="運用">運用<br>
+					<input type="checkbox" name="checkboxfaze"  value="保守">保守<br>
+			</div>
+			<div class="flex-3item">
+				<p>インフラ案件</p>
+				<input type="checkbox" name="checkboxfaze" value="提案">提案<br>
+				<input type="checkbox" name="checkboxfaze"  value="要件定義">要件定義<br>
+				<input type="checkbox" name="checkboxfaze"  value="基本設計">基本設計<br>
+				<input type="checkbox" name="checkboxfaze"  value="詳細設計">詳細設計<br>
+				<input type="checkbox" name="checkboxfaze"  value="構築">構築<br>
+				<input type="checkbox" name="checkboxfaze" value="テスト">テスト<br>
+				<input type="checkbox" name="checkboxfaze"  value="移行">移行<br>
+				<input type="checkbox" name="checkboxfaze"  value="運用">運用<br>
+				<input type="checkbox" name="checkboxfaze"  value="保守">保守<br>
+				<input type="checkbox" name="checkboxfaze"  value="監視">監視<br>
+			</div>
+			<div class="flex-3item">
+				<p>検証案件</p>
+				<input type="checkbox" name="checkboxfaze"  value="テスト計画">テスト計画<br>
+				<input type="checkbox" name="checkboxfaze"  value="テスト管理">テスト管理<br>
+				<input type="checkbox" name="checkboxfaze"  value="テスト設計">テスト設計<br>
+				<input type="checkbox" name="checkboxfaze"  value="テスト実行">テスト実行<br>
+				<p>ロー案件</p>
+				<input type="checkbox" name="checkboxfaze" value="運用/監視">運用/監視<br>
+				<input type="checkbox" name="checkboxfaze"  value="保守">保守<br>
+				<input type="checkbox" name="checkboxfaze"  value="テスト実行">テスト実行<br>
+			</div>
+		</div>
+	<div id="ok" class="defolt plusButton right pointer">確定</div>
+	<div id="close" class="defolt plusButton right pointer">閉じる</div>
+
+	</section>
+	<p class="leftmargin bottom0">スキル検索</p>
+
+		<div class="top0 bottom0 attention attention2">※前後部分一致検索</div>
+		<div>
+				<p class="leftmargin top0"><select class="widthbox bottommargin">
+						<option value="">項目を選択してください</option>
+						<option value="">OS</option>
+						<option value="">NW/FW</option>
+						<option value="">DB</option>
+						<option value="">言語</option>
+					</select>
+					<select  class="widthbox">
+						 <option value="">項目の内容を選択してください</option>
+						 <option value="">Springboot</option>
+						 <option value="">Java</option>
+						 <option value="">Linux</option>
+						 <option value="">PHP</option>
+						 <option value="">Excel</option>
+					 </select>
+					<input class="widthbox inputwidth" type="text" placeholder="バージョン">
+					<select  class="widthbox">
+						 <option value="">経験年数を選択してください</option>
+						 <option value="">1年未満</option>
+						 <option value="">1年以上</option>
+						 <option value="">3年以上</option>
+						 <option value="">5年以上</option>
+						 <option value="">10年以上</option>
+					 </select>
+					 <span><button type="button" id="add" class="add defolt plusButton relative">追加</button></span>
+				</p>
+		</div>
+</div>
+</form>
+</main>
+</body>
+</html>

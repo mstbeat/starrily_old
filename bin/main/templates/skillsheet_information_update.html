@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="jp">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/unity.css">
+<link rel="stylesheet" type="text/css" href="css/skillsheet_update.css">
+<title>スキルシート更新-基本情報</title>
+</head>
+<body>
+	<header th:insert="/header"></header>
+	<main>
+		<div>
+			<h1 class="pagetitle">基本情報更新</h1>
+			<p class="errorMessage">エラーメッセージがここに入ります</p>
+		</div>
+
+
+
+	<form th:method="POST" th:action="@{/skillsheet_reference}">
+		<div class="box">
+			<p class="RequiredMessage left">※は必須項目です</p>
+			<div class="tablepaddig">
+				<div class="flex-container">
+					<div class="flex-4item flex-container">
+						<div class="flex-4item-1">
+							<p class="headline">氏名</p>
+						</div>
+						<div class="flex-4item-2">
+							<p class="top0">
+								<p class="top0"><label>サンプル太郎</label></p>
+							</p>
+						</div>
+					</div>
+					<div class="flex-4item flex-container">
+						<div class="flex-4item-1">
+							<p class="headline">性別<span class="errorMessage">※</span></p>
+						</div>
+						<div class="flex-4item-2">
+							<p>
+								<input class="radio" name="sex" type="radio" value="" checked="checked">男<input
+									class="radio" name="sex" type="radio" value="">女
+							</p>
+						</div>
+					</div>
+					<div class="flex-4item flex-container">
+						<div class="flex-4item-1">
+							<p class="headline">生年月日<span class="errorMessage">※</span></p>
+						</div>
+						<div class="flex-4item-2">
+							<p>
+								<input type="date" class="infomationinput bottommargin"
+									value="1994-02-26">
+							</p>
+						</div>
+					</div>
+					<div class="flex-4item flex-container">
+						<div class="flex-4item-1">
+							<p class="headline">最終学歴<span class="errorMessage">※</span></p>
+						</div>
+						<div class="flex-4item-2">
+							<select class="infomationinput">
+								<option value=""></option>
+								<option value="" selected>某 高等学校 卒</option>
+								<option value="">某 専門学校 卒</option>
+								<option value="">某 大学 卒</option>
+								<option value="">某 大学 中退</option>
+							</select>
+						</div>
+					</div>
+					<div class="flex-4item flex-container">
+						<div class="flex-4item-1">
+							<p class="headline">イニシャル<span class="errorMessage">※</span></p>
+						</div>
+						<div class="flex-4item-2">
+							<input class="infomationinput bottommargin" type="text"
+								value="S.S">
+						</div>
+					</div>
+					<div class="flex-4item flex-container">
+						<div class="flex-4item-1">
+							<p class="headline">現住所<span class="errorMessage">※</span></p>
+						</div>
+						<div class="flex-4item-2">
+							<input class="infomationinput bottommargin" type="text"
+								value="東京都目黒区">
+						</div>
+					</div>
+					<div class="flex-4item flex-container">
+						<div class="flex-4item-1">
+							<p class="headline">年齢</p>
+						</div>
+						<div class="flex-4item-2">
+							<p>
+							<label>26</label>
+							<span class="leftmargin">歳</span></p>
+						</div>
+					</div>
+					<div class="flex-4item flex-container">
+						<div class="flex-4item-1">
+							<p class="headline">最寄駅<span class="errorMessage">※</span></p>
+						</div>
+						<div class="flex-4item-2">
+							<p>
+								<input type="text" class="inputSubway" value="JR"><span>線</span><br>
+								<input type="text" class="inputSubway bottommargin" value="池袋"><span>駅</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="flex-container">
+					<div class="flex-2item-1">
+						<p class="headline top0">得意分野<span class="errorMessage">※</span></p>
+					</div>
+					<div class="flex-2item-2">
+						<textarea class="borderbox" id="textareaHight">英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある</textarea>
+					</div>
+					<div class="flex-2item-1">
+						<p class="headline top0">保有資格</p>
+					</div>
+					<div class="flex-2item-2">
+						<textarea class="borderbox" id="textareaHight">Java 1.8,Kotlin 1.2.41,Spring Boot 2.0.3.RELEASE,Keycloak 4.0.0.Final</textarea>
+					</div>
+					<div class="flex-2item-1">
+						<p class="headline top0">備考</p>
+					</div>
+					<div class="flex-2item-2">
+						<textarea id="textareaHight"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="centerbox">
+			<div class="lineup">
+				<input type="submit" value="更新" class="submitButton defolt bottomwidth width">
+			</div>
+
+			<div class="lineup">
+			   <input type="button" onclick="history.back()" value="戻る" class="backButton defolt bottomwidth width">
+			</div>
+		</div>
+	</form>
+
+	</main>
+	<script type="text/javascript" src="js/unity.js"></script>
+</body>
+</html>

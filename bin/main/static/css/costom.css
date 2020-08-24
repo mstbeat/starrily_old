@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+.boxsidespace{
+  padding: 3% 2%;
+  margin-top: 3%;
+  margin-bottom: 2%;
+}
+.boxtopspace{
+  margin-top: 8%;
+}
+.sidespace{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.updownspace{
+  padding-top: 6%;
+  padding-bottom: 6%;
+}
+.boxheightsize{
+  height: 50px;
+  margin-top: 20px;
+}
+.inputsize{
+  padding: 6px 5px;
+  width: 80%;
+}
+.inputbottomspace{
+  margin-bottom: 20px;
+}
+.imfomationcoment{
+  font-size: 1.2rem;
+  text-align: left;
+  padding-left: 10%;
+  }
+
+.flexbox{
+  display: flex;
+	flex-direction: row;
+}
+.flexitem{
+  margin: 10px 5%;
+	width: 50%;
+	box-sizing: border-box;
+}
+
+/* テーブル関係 */
+
+table.noborder{
+    border-collapse:  collapse;
+    width:  100%;
+}
+.noborder{
+  border: none;
+}
+.serchbox{
+  margin: 0 0 0px 10px;
+  width: 60%;
+  height: 1.5rem;
+}
+.userbox{
+  margin: 0px 10px;
+  width: 70%;
+  height: 1.5rem;
+}
+.serchselect{
+  margin: 0 0 20px 10px;
+  width: 61.5%;
+  height: 2rem;
+}
+.userselect{
+  margin: 0 0 0px 10px;
+  width: 71.5%;
+  height: 2rem;
+}
+ .inputtitle{
+   margin-left: 10px;
+   font-size:0.9rem;
+ }
+ /* テーブル幅指定 */
+ .table20{
+ 	width:20%;
+ }
+ .table15{
+   width:80px;
+ }
+ .table10{
+   width:60px;
+ }
