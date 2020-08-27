@@ -55,13 +55,12 @@ public class SkillsheetDownloadController {
 	 *
 	 * @author kikuchi
 	 * @param response リクエストヘッダ情報
-	 * @return null 何も返しません
 	 * @throws FileNotFoundException ファイルが見つからない場合の例外
 	 * @throws IOException 出力処理に関わる例外
 	 * @throws JRException 帳票定義体に関わる例外
 	 */
 	@PostMapping("/fullname_pdf_download")
-	public String fullNamePdfExport(HttpServletResponse response)
+	public void fullNamePdfExport(HttpServletResponse response)
 			throws FileNotFoundException, IOException, JRException {
 
 		HashMap<String, Object> params = new HashMap<String, Object>();
@@ -86,8 +85,6 @@ public class SkillsheetDownloadController {
 		os.flush();
 		os.close();
 
-		return null;
-
 	}
 
 	/**
@@ -95,12 +92,11 @@ public class SkillsheetDownloadController {
 	 *
 	 * @author kikuchi
 	 * @param response リクエストヘッダ情報
-	 * @return null 何も返しません
 	 * @throws JRException 帳票定義体に関わる例外
 	 * @throws IOException 出力処理に関わる例外
 	 */
 	@PostMapping("/fullname_excel_download")
-	public String fullNameExcelExport(HttpServletResponse response) throws JRException, IOException {
+	public void fullNameExcelExport(HttpServletResponse response) throws JRException, IOException {
 
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("Title", "職務・技術経歴書");
@@ -139,8 +135,6 @@ public class SkillsheetDownloadController {
 		os.flush();
 		os.close();
 
-		return null;
-
 	}
 
 	/**
@@ -148,13 +142,12 @@ public class SkillsheetDownloadController {
 	 *
 	 * @author kikuchi
 	 * @param response リクエストヘッダ情報
-	 * @return null 何も返しません
 	 * @throws FileNotFoundException ファイルが見つからない場合の例外
 	 * @throws IOException 出力処理に関わる例外
 	 * @throws JRException 帳票定義体に関わる例外
 	 */
 	@PostMapping("/initial_pdf_download")
-	public String initialPdfExport(HttpServletResponse response)
+	public void initialPdfExport(HttpServletResponse response)
 			throws FileNotFoundException, IOException, JRException {
 
 		HashMap<String, Object> params = new HashMap<String, Object>();
@@ -179,8 +172,6 @@ public class SkillsheetDownloadController {
 		os.flush();
 		os.close();
 
-		return null;
-
 	}
 
 	/**
@@ -188,12 +179,11 @@ public class SkillsheetDownloadController {
 	 *
 	 * @author kikuchi
 	 * @param response リクエストヘッダ情報
-	 * @return null 何も返しません
 	 * @throws JRException 帳票定義体に関わる例外
 	 * @throws IOException 出力処理に関わる例外
 	 */
 	@PostMapping("/initial_excel_download")
-	public String initialExcelExport(HttpServletResponse response) throws JRException, IOException {
+	public void initialExcelExport(HttpServletResponse response) throws JRException, IOException {
 
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("Title", "職務・技術経歴書");
@@ -231,8 +221,6 @@ public class SkillsheetDownloadController {
 		exporter.exportReport();
 		os.flush();
 		os.close();
-
-		return null;
 
 	}
 
