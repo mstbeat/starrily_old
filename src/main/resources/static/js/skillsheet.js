@@ -197,9 +197,10 @@ jQuery(function($) {
   });
 
   }
-//モーダルウィンドウの閉じるボタンの動き
+
+// モーダルウィンドウの閉じるボタンの動き
 // モーダルウィンドウを閉じる
- window.addEventListener('DOMContentLoaded', function(){
+  window.addEventListener('DOMContentLoaded', function(){
     $('#close').click(function modaleffect() {
       const modal = document.getElementById('modal');
       const kakusu = document.getElementById('mask');
@@ -207,10 +208,9 @@ jQuery(function($) {
         kakusu.classList.add('hidden');
       });
     });
-
-   // モーダルウィンドウの確定ボタンの動き
-   // チェックボックスで選択したものを親画面に表示、モーダルウィンドウを閉じる
-    window.addEventListener('DOMContentLoaded', function(){
+// モーダルウィンドウの確定ボタンの動き
+// チェックボックスで選択したものを親画面に表示、モーダルウィンドウを閉じる
+  window.addEventListener('DOMContentLoaded', function(){
     // モーダルウィンドウを閉じる
     $('#ok').click(function() {
     const modal = document.getElementById('modal');
@@ -227,7 +227,7 @@ jQuery(function($) {
   // 選択したものをから重複を消す
   var set = new Set(input);
   let setToArr = Array.from(set);
-  // 選択したものを親画面に表示、無かったら初期値を入れる
+// 選択したものを親画面に表示、無かったら初期値を入れる
   if (input.length <1) {
     document.getElementById("re").innerHTML ="下のボタンより選択してください";
     } else {
@@ -237,8 +237,8 @@ jQuery(function($) {
     });
   });
 
-  // モーダルウィンドウのクリアボタンの動き
-  // チェックボックスのチェックを外す
+// モーダルウィンドウのクリアボタンの動き
+// チェックボックスのチェックを外す
   $('#modalclear').on('click',function() {
     $('input').prop('checked', false);
     document.getElementById("re").innerHTML ="下のボタンより選択してください";
