@@ -197,10 +197,9 @@ jQuery(function($) {
   });
 
   }
-
-　// モーダルウィンドウの閉じるボタンの動き
-　// モーダルウィンドウを閉じる
-  window.addEventListener('DOMContentLoaded', function(){
+//モーダルウィンドウの閉じるボタンの動き
+// モーダルウィンドウを閉じる
+ window.addEventListener('DOMContentLoaded', function(){
     $('#close').click(function modaleffect() {
       const modal = document.getElementById('modal');
       const kakusu = document.getElementById('mask');
@@ -208,7 +207,8 @@ jQuery(function($) {
         kakusu.classList.add('hidden');
       });
     });
- 　// モーダルウィンドウの確定ボタンの動き
+
+  // モーダルウィンドウの確定ボタンの動き
 　 // チェックボックスで選択したものを親画面に表示、モーダルウィンドウを閉じる
   window.addEventListener('DOMContentLoaded', function(){
     // モーダルウィンドウを閉じる
