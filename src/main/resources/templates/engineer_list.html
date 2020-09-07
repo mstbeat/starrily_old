@@ -15,7 +15,6 @@
 			<h1 class="pagetitle">エンジニア一覧</h1>
 			<p class="errorMessage" th:text="エラーメッセージがここに入ります"></p>
 			<input type="button" onclick="history.back()" value="戻る" class="backButton right defolt">
-			<!-- <input type="submit" value="戻る" class="backButton"> -->
 		</div>
 
 	<div class="resultList">
@@ -47,8 +46,10 @@
 					<td>＃「業界」/年数、＃「DB」/年数、＃「言語１」/年数、
 						<br>＃「言語２」/年数/リーダー経験、＃「その他」検索内によって変わる）</td>
 					<td>提案不可</td>
-					<td><form th:action="@{skillsheet_reference}" th:method="post">
-						<input type="submit"  class="nonhoverdefolt backglay" th:value="参照">
+					<td><form th:method="get" th:action="@{skillsheet_reference}">
+						<!-- hiddenでuserIdを送る。 -->
+						<input type="hidden" name="userId"></input>
+						<input type="submit" class="nonhoverdefolt backglay" th:value="参照">
 					</form></td>
 				</tr>
 			</tbody>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.transaction.annotation.Transactional;
 
+import starrily.bean.Dropdown;
 import starrily.bean.SkillSheet;
 import starrily.bean.UserInformation;
 
@@ -17,6 +18,28 @@ import starrily.bean.UserInformation;
 @Mapper
 public interface StarrilyMapper {
 
+	public SkillSheet getSkillSheetBase(int userId);
+
+	/**
+	* ドロップダウン情報取得.
+	* @param itemNumber ドロップダウンのitem_numberの値
+	* @return スキルシートbeanクラス
+	*/
+	public List<Dropdown> getDropdownInfo(int itemNumber);
+
+	/**
+	* 基本情報更新.
+	* @param skillSheet スキルシートbeanクラス
+	* @return スキルシートbeanクラス
+	*/
+	public int updateBasicInformation(SkillSheet skillSheet);
+
+	/**
+	* 権限取得.
+	* @param userId ユーザーID
+	* @return 権限情報
+	*/
+	public int getUserRole(int userId);
 
 	/**
 	 * DB情報検索.
@@ -65,14 +88,14 @@ public interface StarrilyMapper {
 	 * @param userId ユーザーID
 	 * @return 基本情報
 	 */
-	public List<SkillSheet> getSkillSheetBasic(String userId);
+	public List<SkillSheet> getSkillSheetBasic(int userId);
 
 	/**
 	 * 案件基本情報取得.
 	 * @param userId ユーザーID
 	 * @return 案件基本情報
 	 */
-	public List<SkillSheet> getProjectAll(String userId);
+	public List<SkillSheet> getProjectAll(int userId);
 
 	/**
 	 * 案件基本取得.
@@ -86,35 +109,35 @@ public interface StarrilyMapper {
 	 * @param careerId 経歴ID
 	 * @return DB情報
 	 */
-	public List<SkillSheet> getProjectDB(String careerId);
+	public List<SkillSheet> getProjectDB(int careerId);
 
 	/**
 	 * FW/NW情報取得.
 	 * @param careerId 経歴ID
 	 * @return FW/NW情報
 	 */
-	public List<SkillSheet> getProjectFwNw(String careerId);
+	public List<SkillSheet> getProjectFwNw(int careerId);
 
 	/**
 	 * OS情報取得.
 	 * @param careerId 経歴ID
 	 * @return OS情報
 	 */
-	public List<SkillSheet> getProjectOS(String careerId);
+	public List<SkillSheet> getProjectOS(int careerId);
 
 	/**
 	 * 言語情報取得.
 	 * @param careerId 経歴ID
 	 * @return 言語情報
 	 */
-	public List<SkillSheet> getProjectLang(String careerId);
+	public List<SkillSheet> getProjectLang(int careerId);
 
 	/**
 	 * その他情報取得.
 	 * @param careerId 経歴ID
 	 * @return その他情報
 	 */
-	public List<SkillSheet> getProjectOther(String careerId);
+	public List<SkillSheet> getProjectOther(int careerId);
 
 	/**
 	 * 基本情報登録.

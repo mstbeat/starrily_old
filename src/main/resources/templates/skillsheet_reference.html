@@ -14,27 +14,36 @@
 	<h1 class="pagetitle">スキルシート参照</h1>
 	<p class="errorMessage">エラーメッセージがここに入ります</p>
 	<div class="bottomspace">
- 		<input type="button" onclick="history.back()" value="戻る" class="backButton defolt right">
+
+	<form th:method="POST" th:action="@{/engineer_list}">
+	  <div>
+		<input type="hidden" name="userId" id="userId">
+ 		<input type="submit" value="戻る" class="backButton defolt right">
+	  </div>
+ 	</form>
 
 	<form th:method="POST" th:action="@{/skillsheet_download}">
 	  <input type="submit" class="submitButton right defolt" value="ダウンロード">
 	</form>
 	</div>
 
-	<div class="box">
+	<div class="box" th:each="skillSheetBasicList : ${skillSheetBasicList}" th:object="${skillSheetBasicList}">
 	 	<div class="box-title">基本情報</div>
+
 		<form th:method="POST" th:action="@{/skillsheet_information_update}">
-		<input type="submit" class="add rightrelative defolt" value="基本情報更新">
+		  <input type="hidden" name="userId" th:value="*{userId}">
+		  <input type="submit" class="add rightrelative defolt" value="基本情報更新">
 		</form>
 
-		<div class="tablepaddig">
+		 <div class="tablepaddig">
 			<div class="flex-container">
 				<div class="flex-4item flex-container">
 					<div class="flex-4item-1">
 						<p class="headline">氏名</p>
 					</div>
 					<div class="flex-4item-2">
-						<p class="top0"><span class="smalltext">サンプルシメイ</span><br><span>サンプル氏名</span></p>
+						<p class="top0"><span class="smalltext" th:text="*{userPhonetic}">サンプルシメイ</span><br>
+						<span th:text="*{userName}">サンプル氏名</span></p>
 					</div>
 				</div>
 				<div class="flex-4item flex-container">
@@ -42,7 +51,7 @@
 						<p class="headline">性別</p>
 					</div>
 					<div class="flex-4item-2">
-						<p>男</p>
+						<p th:text="*{userSex}">男</p>
 					</div>
 				</div>
 				<div class="flex-4item flex-container">
@@ -50,7 +59,7 @@
 						<p class="headline">生年月日</p>
 					</div>
 					<div class="flex-4item-2">
-						<p>1994</p>
+						<p th:text="*{#dates.year(userBirthday)}">1994</p>
 					</div>
 				</div>
 				<div class="flex-4item flex-container">
@@ -58,7 +67,7 @@
 						<p class="headline">最終学歴</p>
 					</div>
 					<div class="flex-4item-2">
-						<p>某　大学卒</p>
+					<p th:text="*{userFinalEducation}"></p>
 					</div>
 				</div>
 				<div class="flex-4item flex-container">
@@ -66,7 +75,7 @@
 						<p class="headline">イニシャル</p>
 					</div>
 					<div class="flex-4item-2">
-						<p>S.S</p>
+						<p th:text="*{userInitialName}">S.S</p>
 					</div>
 				</div>
 				<div class="flex-4item flex-container">
@@ -74,7 +83,7 @@
 						<p class="headline">現住所</p>
 					</div>
 					<div class="flex-4item-2">
-						<p>東京都目黒区</p>
+						<p th:text="*{userAddress}">東京都目黒区</p>
 					</div>
 				</div>
 				<div class="flex-4item flex-container">
@@ -82,7 +91,7 @@
 						<p class="headline">年齢</p>
 					</div>
 					<div class="flex-4item-2">
-						<p>26</p>
+						<p th:text="*{userAge}">26</p>
 					</div>
 				</div>
 				<div class="flex-4item flex-container">
@@ -90,57 +99,66 @@
 						<p class="headline">最寄駅</p>
 					</div>
 					<div class="flex-4item-2">
-						<p><span>JR</span>線<span>池袋</span>駅</p>
+						<p><span th:text="*{userStationLine}">中央</span>線<span th:text="*{userStation}">池袋</span>駅</p>
 					</div>
 				</div>
 			</div>
+
 			<div class="flex-container">
 				<div class="flex-2item-1">
 					<p class="headline top0">得意分野</p>
 				</div>
 				<div class="flex-2item-2">
-					<p class="borderbox top0">英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある</p>
+					<p class="borderbox top0" th:text="*{userAppeal}">英語ニュースにあまり慣れ親しんでいない人にとって、
+					headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、
+					＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、
+					 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。
+					 この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、
+					 英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある</p>
 				</div>
 				<div class="flex-2item-1">
 					<p class="headline top0">保有資格</p>
 				</div>
 				<div class="flex-2item-2">
-					<p class="borderbox top0">Java 1.8,Kotlin 1.2.41,Spring Boot 2.0.3.RELEASE,Keycloak 4.0.0.Final</p>
+					<p class="borderbox top0" th:text="*{userCertification}">Java 1.8,Kotlin 1.2.41,Spring Boot 2.0.3.RELEASE,Keycloak 4.0.0.Final</p>
 				</div>
 				<div class="flex-2item-1">
 					<p class="headline top0">備考</p>
 				</div>
 				<div class="flex-2item-2">
-					<p class="borderbox top0">&emsp;</p>
+					<p class="borderbox top0" th:text="*{userRemarks}"></p>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
 	<div><form th:method="POST" th:action="@{/skillsheet_project_registration}">
 			<input class="add right defolt" type="submit" value="案件追加">
 	</form></div>
 
-	<div class="box">
+
+	<div class="box" th:each="projectAllList ,elementStat: ${projectAllList}" th:object="${projectAllList}">
 
 		<form th:method="DELETE" th:action="@{/skillsheet_reference}">
-			<input class="deleteproject backButton right defolt" type="submit" value="案件削除"/>
+	      <input type="hidden" name="userId" th:value="*{userId}">
+	      <input type="hidden" name="careerId" th:value="*{careerId}">
+	      <input type="hidden" name="updateDate" th:value="*{updateDate}">
+		  <input class="deleteproject backButton right defolt" type="submit" value="案件削除">
 		</form>
 
 		<form th:method="POST" th:action="@{/skillsheet_project_update}">
 			<input class="submitButton right defolt" type="submit" value="案件更新"/>
 		</form>
 
-		<div class="box-title">案件No.1</div>
+		<div class="box-title">案件No.<span th:text="${elementStat.count}"></span></div>
 			<div class="tablepaddig">
 				<div class="flex-container">
 					<div class="flex-3item flex-container">
 						<div class="flex-3item-1">
-							<p class="headline">業務名</p>
+						  <p class="headline">業務名</p>
 						</div>
 						<div class="flex-3item-2">
-							<p>○○システム</p>
+							<p th:text="*{businessName}">○○システム</p>
 						</div>
 					</div>
 					<div class="flex-3item flex-container">
@@ -148,15 +166,17 @@
 							<p class="headline">業界</p>
 						</div>
 						<div class="flex-3item-2">
-							<p>小売</p>
+							<p th:text="*{industry}">小売</p>
 						</div>
 					</div>
 					<div class="flex-3item flex-container">
 						<div class="flex-3item-1">
 							<p class="headline">案件期間</p>
 						</div>
-						<div class="flex-3item-2">
-							<p>2019年4月～2020年3月<br>12か月</p>
+						<div class="flex-3item-2" style="margin-top:16px;">
+							<span th:text="*{startDate}"></span> ~
+							<span th:text="*{finishDate}"></span><br>
+							<span th:text="*{periodDate}"></span>ヶ月
 						</div>
 					</div>
 					<div class="flex-3item flex-container">
@@ -164,7 +184,7 @@
 							<p class="headline">担当<br>フェーズ</p>
 						</div>
 						<div class="flex-3item-2">
-							<p>要件定義、詳細設計、製造、単体テスト、要件定義、詳細設計、製造、単体テスト</p>
+							<p th:text="*{chargePhase}">要件定義、詳細設計、製造、単体テスト、要件定義、詳細設計、製造、単体テスト</p>
 						</div>
 					</div>
 					<div class="flex-3item flex-container">
@@ -172,7 +192,7 @@
 							<p class="headline">チーム人数</p>
 						</div>
 						<div class="flex-3item-2">
-							<p>20<span>人</span></p>
+							<p th:text="*{teamNumber}">20<span>人</span></p>
 						</div>
 					</div>
 					<div class="flex-3item flex-container">
@@ -180,11 +200,11 @@
 							<p class="headline">ポジション</p>
 						</div>
 						<div class="flex-3item-2">
-							<p>メンバー</p>
+							<p th:text="*{position}">メンバー</p>
 						</div>
 					</div>
 				</div>
-			<table class="borderbox">
+			 <table class="borderbox">
 				<tbody>
 					<tr>
 						<th class="borderbox">OS</th>
@@ -195,25 +215,35 @@
 					</tr>
 					<tr>
 						<th class="borderbox">
-							<div>Windows10</div>
+						  <div>
+							<pre th:text="*{AllOs}">Windows10</pre>
+						  </div>
 						</th>
 						<th class="borderbox">
-							<div>SpringBoot</div>
+						  <div>
+						    <pre th:text="*{AllFwNw}">SpringBoot</pre>
+						  </div>
 						</th>
 						<th class="borderbox">
-							<div>MySQL8.0</div>
+						  <div>
+						    <pre th:text="*{AllDb}">MySQL8.0</pre>
+						  </div>
+						</th>
+						<th class="borderbox" >
+						  <div>
+						    <pre th:text="*{AllLang}">Java11</pre>
+						  </div>
 						</th>
 						<th class="borderbox">
-							<div>Java11</div>
-						</th>
-						<th class="borderbox">
-							<div>Tomcat9.0</div>
+						  <div>
+						    <pre th:text="*{AllOther}">Tomcat</pre>
+						  </div>
 						</th>
 					</tr>
 				</tbody>
 			</table>
 			<p class="headline">業務内容</p>
-			<textarea readonly  rows="15">
+			<textarea readonly  rows="15" th:text="*{businessContent}">
 Servlet／JSPで作成されている生花店様向けショッピングサイトを、SpringBoot化するリプレース対応業務に携わりました。
 【業務内容】
 ・画面の製造
@@ -227,113 +257,8 @@ Servlet／JSPで作成されている生花店様向けショッピングサイ�
 ・メンバーに相談し、作業遅延にならないよう努めました。
 ・レビューでの指摘を繰り返さないようにしました。
 			</textarea>
+			</div>
 		</div>
-	</div>
-
-	<div class="box">
-		<form th:method="POST" th:action="@{/skillsheet_reference}">
-		  <input class="deleteproject backButton right defolt" type="submit" value="案件削除"/>
-		</form>
-		<form th:method="POST" th:action="@{/skillsheet_project_update}">
-		  <input class="submitButton right defolt" type="submit" value="案件更新"/>
-		</form>
-		<div class="box-title">案件No.2</div>
-			<div class="tablepaddig">
-				<div class="flex-container">
-					<div class="flex-3item flex-container">
-						<div class="flex-3item-1">
-							<p class="headline">業務名</p>
-						</div>
-						<div class="flex-3item-2">
-							<p>○○システム</p>
-						</div>
-					</div>
-					<div class="flex-3item flex-container">
-						<div class="flex-3item-1">
-							<p class="headline">業界</p>
-						</div>
-						<div class="flex-3item-2">
-							<p>小売</p>
-						</div>
-					</div>
-					<div class="flex-3item flex-container">
-						<div class="flex-3item-1">
-							<p class="headline">案件期間</p>
-						</div>
-						<div class="flex-3item-2">
-							<p>2019年4月～2020年3月<br>12か月</p>
-						</div>
-					</div>
-					<div class="flex-3item flex-container">
-						<div class="flex-3item-1">
-							<p class="headline">担当<br>フェーズ</p>
-						</div>
-						<div class="flex-3item-2">
-							<p>要件定義、詳細設計、製造、単体テスト、要件定義、詳細設計、製造、単体テスト</p>
-						</div>
-					</div>
-					<div class="flex-3item flex-container">
-						<div class="flex-3item-1">
-							<p class="headline">チーム人数</p>
-						</div>
-						<div class="flex-3item-2">
-							<p>20<span>人</span></p>
-						</div>
-					</div>
-					<div class="flex-3item flex-container">
-						<div class="flex-3item-1">
-							<p class="headline">ポジション</p>
-						</div>
-						<div class="flex-3item-2">
-							<p>メンバー</p>
-						</div>
-					</div>
-				</div>
-			<table class="borderbox">
-				<tbody>
-					<tr>
-						<th class="borderbox">OS</th>
-						<th class="borderbox">FW/NW</th>
-						<th class="borderbox">DB</th>
-						<th class="borderbox">言語</th>
-						<th class="borderbox">その他</th>
-					</tr>
-					<tr>
-						<th class="borderbox">
-							<div>Windows10</div>
-						</th>
-						<th class="borderbox">
-							<div>SpringBoot</div>
-						</th>
-						<th class="borderbox">
-							<div>MySQL8.0</div>
-						</th>
-						<th class="borderbox">
-							<div>Java11</div>
-						</th>
-						<th class="borderbox">
-							<div>Tomcat9.0</div>
-						</th>
-					</tr>
-				</tbody>
-			</table>
-			<p class="headline">業務内容</p>
-			<textarea readonly rows="15">
-Servlet／JSPで作成されている生花店様向けショッピングサイトを、SpringBoot化するリプレース対応業務に携わりました。
-【業務内容】
-・画面の製造
-・帳票（PDF）の作成
-・単体テスト仕様書の作成及び、単体テストの実施
-・詳細設計書の軽微な修正
-・結合テスト実施
-
-【心掛けたこと】
-・毎朝進行スケジュールを組んで進めました。
-・メンバーに相談し、作業遅延にならないよう努めました。
-・レビューでの指摘を繰り返さないようにしました。
-			</textarea>
-		</div>
-	</div>
 
 	<script type="text/javascript" src="js/unity.js"></script>
 </main>
