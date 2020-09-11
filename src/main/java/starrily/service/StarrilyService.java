@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import starrily.bean.Dropdown;
 import starrily.bean.SkillSheet;
 import starrily.bean.UserInformation;
 import starrily.mapper.starrilydb.StarrilyMapper;
@@ -19,6 +21,43 @@ public class StarrilyService {
 
 	@Autowired
 	StarrilyMapper starrilyMapper;
+
+	/**
+	* 基本情報.
+	* @param userId  ユーザーId
+	* @return 基本情報
+	*/
+	public SkillSheet getSkillSheetBase(int userId) {
+		return starrilyMapper.getSkillSheetBase(userId);
+	}
+
+	/**
+	* ドロップダウン情報.
+	* @param itemNumber ドロップダウンテーブルのitem_numberの値
+	* @return スキルシートbeanクラス
+	*/
+	public List<Dropdown> getDropdownInfo(int itemNumber) {
+		return starrilyMapper.getDropdownInfo(itemNumber);
+	}
+
+	/**
+	* 基本情報更新.
+	* @param skillSheet スキルシートbeanクラス
+	* @return スキルシートbeanクラス
+	*/
+	@Transactional
+	public int updateBasicInformation(SkillSheet skillSheet) {
+	 return starrilyMapper.updateBasicInformation(skillSheet);
+	}
+
+	/**
+	 * 権限情報取得.
+	 * @param userId ユーザーId
+	 * @return 権限情報
+	 */
+	public int getUserRole(int userId) {
+		return starrilyMapper.getUserRole(userId);
+	}
 
 	/**
 	 * DB情報検索.
@@ -79,7 +118,7 @@ public class StarrilyService {
 	 * @param userId ユーザーID
 	 * @return 基本情報
 	 */
-	public List<SkillSheet> getSkillSheetBasic(String userId) {
+	public List<SkillSheet> getSkillSheetBasic(int userId) {
 		return starrilyMapper.getSkillSheetBasic(userId);
 	}
 
@@ -88,7 +127,7 @@ public class StarrilyService {
 	 * @param userId ユーザーID
 	 * @return 案件基本情報
 	 */
-	public List<SkillSheet> getProjectAll(String userId) {
+	public List<SkillSheet> getProjectAll(int userId) {
 		return starrilyMapper.getProjectAll(userId);
 	}
 
@@ -106,7 +145,7 @@ public class StarrilyService {
 	 * @param careerId 経歴ID
 	 * @return DB情報
 	 */
-	public List<SkillSheet> getProjectDB(String careerId) {
+	public List<SkillSheet> getProjectDB(int careerId) {
 		return starrilyMapper.getProjectDB(careerId);
 	}
 
@@ -115,7 +154,7 @@ public class StarrilyService {
 	 * @param careerId 経歴ID
 	 * @return FW/NW情報
 	 */
-	public List<SkillSheet> getProjectFwNw(String careerId) {
+	public List<SkillSheet> getProjectFwNw(int careerId) {
 		return starrilyMapper.getProjectFwNw(careerId);
 	}
 
@@ -124,7 +163,7 @@ public class StarrilyService {
 	 * @param careerId 経歴ID
 	 * @return OS情報
 	 */
-	public List<SkillSheet> getProjectOS(String careerId) {
+	public List<SkillSheet> getProjectOS(int careerId) {
 		return starrilyMapper.getProjectOS(careerId);
 
 	}
@@ -134,7 +173,7 @@ public class StarrilyService {
 	 * @param careerId 経歴ID
 	 * @return 言語情報
 	 */
-	public List<SkillSheet> getProjectLang(String careerId) {
+	public List<SkillSheet> getProjectLang(int careerId) {
 		return starrilyMapper.getProjectLang(careerId);
 	}
 
@@ -143,7 +182,7 @@ public class StarrilyService {
 	 * @param careerId 経歴ID
 	 * @return その他情報
 	 */
-	public List<SkillSheet> getProjectOther(String careerId) {
+	public List<SkillSheet> getProjectOther(int careerId) {
 		return starrilyMapper.getProjectOther(careerId);
 	}
 
@@ -223,6 +262,7 @@ public class StarrilyService {
 	 * 案件削除.
 	 * @param skillSheet スキルシートbeanクラス
 	 */
+	@Transactional
 	public void deleteSkillSheetProject(SkillSheet skillSheet) {
 		starrilyMapper.deleteSkillSheetProject(skillSheet);
 	}

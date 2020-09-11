@@ -2,6 +2,81 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="starrily.mapper.starrilydb.StarrilyMapper">
 
+<!-- 基本情報表示(更新画面)-->
+<select id="getSkillSheetBase" parameterType="Integer" resultType="starrily.bean.SkillSheet">
+    SELECT
+    	SUB.user_id AS userId
+        ,UI.User_name AS userName
+        ,SUB.User_birthday AS userBirthday
+        ,SUB.User_initial_name AS userInitialName
+        ,SUB.User_sex AS userSex
+        ,SUB.User_final_education AS userFinalEducation
+        ,SUB.User_address AS userAddress
+        ,SUB.User_station_line AS userStationLine
+        ,SUB.User_station AS userStation
+        ,SUB.User_appeal AS userAppeal
+        ,SUB.User_certification AS userCertification
+        ,SUB.User_remarks AS userRemarks
+        ,SUB.Update_date AS updateDate
+        ,TIMESTAMPDIFF(YEAR, `user_birthday`, CURDATE()) AS userAge
+   FROM
+        starrilyUserInfo UI
+   JOIN
+        StarrilyUserBasicInfo SUB
+   ON
+        UI.User_id = SUB.User_id
+   WHERE
+        UI.User_id= #{userId}
+        AND UI.Delete_flg = '0'
+</select>
+
+<!-- ドロップダウン情報取得 -->
+<select id="getDropdownInfo" parameterType="Integer" resultType="starrily.bean.Dropdown">
+	SELECT
+		item_name AS itemName
+	FROM
+		Starrilydropdown
+	WHERE
+		item_number = #{itemNumber}
+</select>
+
+<!-- 基本情報更新 -->
+<update id="updateBasicInformation" parameterType="starrily.bean.SkillSheet">
+    UPDATE
+         StarrilyUserBasicInfo AS SUB
+     JOIN
+        StarrilyUserInfo AS UI
+     ON
+        UI.User_id = SUB.User_id
+    SET
+       SUB.User_id = #{userId},
+        SUB.User_birthday = #{userBirthday},
+        SUB.User_initial_name = #{userInitialName},
+        SUB.User_sex = #{userSex},
+        SUB.User_final_education = #{userFinalEducation},
+        SUB.User_address = #{userAddress},
+        SUB.User_station_line = #{userStationLine},
+        SUB.User_station = #{userStation},
+        SUB.User_appeal = #{userAppeal},
+        SUB.User_certification = #{userCertification},
+        SUB.User_remarks = #{userRemarks},
+        SUB.Update_date = #{updateDate}
+    WHERE
+        UI.User_id= #{userId}
+        AND UI.Delete_flg = '0'
+        AND SUB.Update_date <![CDATA[ <= ]]> #{updateDate}
+</update>
+
+<!-- 権限取得 -->
+<select id="getUserRole" resultType="Integer">
+	SELECT
+		user_role AS userRole
+	FROM
+		starrilyrole
+	WHERE
+		user_id = #{userId}
+</select>
+
 <!--DB情報検索-->
 <select id="searchProjectDB" parameterType="starrily.bean.SkillSheet" resultType="starrily.bean.SkillSheet">
     SELECT
@@ -147,13 +222,14 @@
 </select>
 
 <!--基本情報取得-->
-<select id="getSkillSheetBasic" parameterType="String" resultType="starrily.bean.SkillSheet">
+<select id="getSkillSheetBasic" parameterType="Integer" resultType="starrily.bean.SkillSheet">
     SELECT
-        UI.User_name AS userName
+    	SUB.user_id AS userId
+        ,UI.User_name AS userName
         ,UI.User_phonetic AS userPhonetic
+        ,SUB.User_birthday AS userBirthday
         ,SUB.User_initial_name AS userInitialName
         ,SUB.User_sex AS userSex
-        ,SUB.User_birthday AS userBirthday
         ,SUB.User_final_education AS userFinalEducation
         ,SUB.User_address AS userAddress
         ,SUB.User_station_line AS userStationLine
@@ -162,6 +238,7 @@
         ,SUB.User_certification AS userCertification
         ,SUB.User_remarks AS userRemarks
         ,SUB.Update_date AS updateDate
+        ,TIMESTAMPDIFF(YEAR, `user_birthday`, CURDATE()) AS userAge
    FROM
         StarrilyUserInfo UI
    JOIN
@@ -174,12 +251,10 @@
 </select>
 
 <!--案件基本情報取得-->
-<select id="getProjectAll" parameterType="String" resultType="starrily.bean.SkillSheet">
+<select id="getProjectAll" parameterType="Integer" resultType="starrily.bean.SkillSheet">
     SELECT
         SUD.Career_id AS careerId
-        ,SUD.Start_date AS startDate
-        ,SUD.Finish_date AS finishDate
-        ,SUD.Period_date AS periodDate
+        ,SUD.user_id AS userId
         ,SUD.Business_name AS businessName
         ,SUD.Industry AS industry
         ,SUD.Teams_number AS teamNumber
@@ -187,6 +262,9 @@
         ,SUD.Charge_phase AS chargePhase
         ,SUD.Business_content AS businessContent
         ,SUD.Update_date AS updateDate
+        ,TIMESTAMPDIFF(MONTH, SUD.Start_date, SUD.Finish_date) AS periodDate
+        ,DATE_FORMAT(SUD.Start_date, '%Y年%m月') AS startDate
+        ,DATE_FORMAT(SUD.Finish_date, '%Y年%m月') AS finishDate
    FROM
         StarrilyUserInfo UI
    JOIN
@@ -194,7 +272,7 @@
    ON
         UI.User_id = SUD.User_id
     WHERE
-        UI.User_id= #{userId}
+        UI.User_id = #{userId}
         AND UI.Delete_flg = '0'
         AND SUD.Delete_flg = '0'
 </select>
@@ -226,61 +304,46 @@
         AND SUD.Delete_flg = '0'
 </select>
 <!--DB情報取得-->
-<select id="getProjectDB" parameterType="String" resultType="starrily.bean.SkillSheet">
+<select id="getProjectDB" parameterType="Integer" resultType="starrily.bean.SkillSheet">
     SELECT
-        SDI.Career_id AS careerId
-        ,SDI.Db AS db
-        ,SDI.Db_ver AS dbVer
-        ,SDI.Db_period AS dbPeriod
+        Career_id AS careerId
+        ,Db AS db
+        ,Db_ver AS dbver
+        ,Db_period AS dbPeriod
    FROM
-        StarrilyUserDetailInfo SUD
-   JOIN
-        StarrilyDBInfo SDI
-   ON
-        SUD.Career_id = SDI.Career_id
+        StarrilyDBInfo
     WHERE
-        SUD.Career_id in  (#{careerId})
-        AND SUD.Delete_flg = '0'
+        Career_id = #{careerId}
 </select>
 
 <!--FW/NW情報取得-->
-<select id="getProjectFwNw" parameterType="String" resultType="starrily.bean.SkillSheet">
+<select id="getProjectFwNw" parameterType="Integer" resultType="starrily.bean.SkillSheet">
     SELECT
-        SFI.Career_id AS careerId
-        ,SFI.Fw_nw AS fwNw
-        ,SFI.Fw_nw_ver AS fwNwVer
-        ,SFI.Fw_nw_period AS fwNwPeriod
+        Career_id AS careerId
+        ,Fw_nw AS fwNw
+        ,Fw_nw_ver AS fwNwVer
+        ,Fw_nw_period AS fwNwPeriod
    FROM
-        StarrilyUserDetailInfo SUD
-   JOIN
-        StarrilyFwNwInfo SFI
-   ON
-        SUD.Career_id = SFI.Career_id
+        StarrilyFwNwInfo
     WHERE
-        SUD.Career_id in  (#{careerId})
-        AND SUD.Delete_flg = '0'
+        Career_id = #{careerId}
 </select>
 
 <!--OS情報取得-->
-<select id="getProjectOS" parameterType="String" resultType="starrily.bean.SkillSheet">
+<select id="getProjectOS" parameterType="Integer" resultType="starrily.bean.SkillSheet">
     SELECT
-        SOI.Career_id AS careerId
-        ,SOI.Os AS os
-        ,SOI.Os_ver AS osVer
-        ,SOI.Os_period AS osPeriod
+        Career_id AS careerId
+        ,Os AS os
+        ,Os_ver AS osVer
+        ,Os_period AS osPeriod
    FROM
-        StarrilyUserDetailInfo SUD
-   JOIN
-        StarrilyOSInfo SOI
-   ON
-        SUD.Career_id = SOI.Career_id
+        StarrilyOSInfo
     WHERE
-        SUD.Career_id in  (#{careerId})
-        AND SUD.Delete_flg = '0'
+        Career_id = #{careerId}
 </select>
 
 <!--言語情報取得-->
-<select id="getProjectLang" parameterType="String" resultType="starrily.bean.SkillSheet">
+<select id="getProjectLang" parameterType="Integer" resultType="starrily.bean.SkillSheet">
     SELECT
         SLI.Career_id AS careerId
         ,SLI.Language AS language
@@ -298,7 +361,7 @@
 </select>
 
 <!--その他情報取得-->
-<select id="getProjectOther" parameterType="String" resultType="starrily.bean.SkillSheet">
+<select id="getProjectOther" parameterType="Integer" resultType="starrily.bean.SkillSheet">
     SELECT
         SOI.Career_id AS careerId
         ,SOI.Other AS other
@@ -382,31 +445,31 @@
 </update>
 
 <!--案件基本情報登録-->
-<insert id="insertProject" parameterType="starrily.bean.SkillSheet">
+<insert id="insertProject" parameterType="starrily.bean.SkillSheet" useGeneratedKeys="true" keyProperty="careerId" keyColumn="career_id">
     INSERT INTO StarrilyUserDetailInfo(
         User_id,
-        Start_date,
-        Finish_date,
-        Period_date,
-        Business_name,
-        Industry,
-        Teams_number,
-        Position,
-        Charge_phase,
-        Business_content,
-        Registered_date,
-        Update_date
+        start_date,
+        finish_date,
+        period_date,
+        business_name,
+        industry,
+        teams_number,
+        position,
+        charge_phase,
+        business_content,
+        registered_date,
+        update_date
     )VALUES(
         #{userId},
         #{startDate},
         #{finishDate},
         #{periodDate},
         #{businessName},
-        #{Industry},
+        #{industry},
         #{teamNumber},
-        #{Position},
+        #{position},
         #{chargePhase},
-        #{businessContent}
+        #{businessContent},
         CURRENT_TIMESTAMP(),
         CURRENT_TIMESTAMP())
 </insert>

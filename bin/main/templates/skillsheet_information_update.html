@@ -16,10 +16,8 @@
 			<p class="errorMessage">エラーメッセージがここに入ります</p>
 		</div>
 
-
-
-	<form th:method="POST" th:action="@{/skillsheet_reference}">
-		<div class="box">
+	<form th:method="PUT" th:action="@{/skillsheet_information_update}" th:object="${skillSheetBasicList}">
+	  <div class="box">
 			<p class="RequiredMessage left">※は必須項目です</p>
 			<div class="tablepaddig">
 				<div class="flex-container">
@@ -29,7 +27,7 @@
 						</div>
 						<div class="flex-4item-2">
 							<p class="top0">
-								<p class="top0"><label>サンプル太郎</label></p>
+						      <p class="top0"><label th:text="*{userName}">サンプル太郎</label>
 							</p>
 						</div>
 					</div>
@@ -39,8 +37,8 @@
 						</div>
 						<div class="flex-4item-2">
 							<p>
-								<input class="radio" name="sex" type="radio" value="" checked="checked">男<input
-									class="radio" name="sex" type="radio" value="">女
+							  <input class="radio" type="radio" value="男" th:field="*{userSex}">男
+							  <input class="radio" type="radio" value="女" th:field="*{userSex}">女
 							</p>
 						</div>
 					</div>
@@ -50,8 +48,7 @@
 						</div>
 						<div class="flex-4item-2">
 							<p>
-								<input type="date" class="infomationinput bottommargin"
-									value="1994-02-26">
+							  <input type="date" class="infomationinput bottommargin" th:field="*{userBirthday}">
 							</p>
 						</div>
 					</div>
@@ -60,13 +57,10 @@
 							<p class="headline">最終学歴<span class="errorMessage">※</span></p>
 						</div>
 						<div class="flex-4item-2">
-							<select class="infomationinput">
-								<option value=""></option>
-								<option value="" selected>某 高等学校 卒</option>
-								<option value="">某 専門学校 卒</option>
-								<option value="">某 大学 卒</option>
-								<option value="">某 大学 中退</option>
-							</select>
+						  <select class="infomationinput" th:field="*{userFinalEducation}">
+						   <option th:each="dropdownInfo: ${dropdownInfo}" th:value="${dropdownInfo.itemName}"
+							  th:text="${dropdownInfo.itemName}"></option>
+						  </select>
 						</div>
 					</div>
 					<div class="flex-4item flex-container">
@@ -74,8 +68,7 @@
 							<p class="headline">イニシャル<span class="errorMessage">※</span></p>
 						</div>
 						<div class="flex-4item-2">
-							<input class="infomationinput bottommargin" type="text"
-								value="S.S">
+							<input class="infomationinput bottommargin" type="text" th:field="*{userInitialName}">
 						</div>
 					</div>
 					<div class="flex-4item flex-container">
@@ -83,8 +76,7 @@
 							<p class="headline">現住所<span class="errorMessage">※</span></p>
 						</div>
 						<div class="flex-4item-2">
-							<input class="infomationinput bottommargin" type="text"
-								value="東京都目黒区">
+							<input class="infomationinput bottommargin" type="text" th:field="*{userAddress}">
 						</div>
 					</div>
 					<div class="flex-4item flex-container">
@@ -92,9 +84,7 @@
 							<p class="headline">年齢</p>
 						</div>
 						<div class="flex-4item-2">
-							<p>
-							<label>26</label>
-							<span class="leftmargin">歳</span></p>
+							<span class="leftmargin" th:text="*{userAge}"></span>&emsp; 歳
 						</div>
 					</div>
 					<div class="flex-4item flex-container">
@@ -103,8 +93,8 @@
 						</div>
 						<div class="flex-4item-2">
 							<p>
-								<input type="text" class="inputSubway" value="JR"><span>線</span><br>
-								<input type="text" class="inputSubway bottommargin" value="池袋"><span>駅</span>
+								<input type="text" class="inputSubway" th:field="*{userStationLine}"><span>線</span><br>
+								<input type="text" class="inputSubway bottommargin" th:field="*{userStation}"><span>駅</span>
 							</p>
 						</div>
 					</div>
@@ -114,27 +104,35 @@
 						<p class="headline top0">得意分野<span class="errorMessage">※</span></p>
 					</div>
 					<div class="flex-2item-2">
-						<textarea class="borderbox" id="textareaHight">英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある</textarea>
+						<textarea class="borderbox" id="textareaHight" th:field="*{userAppeal}">英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、
+						＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、
+						 headline はとても理解しにくいのではないでしょうか。その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。
+						 この書式には、文法上の特別なルールがある英語ニュースにあまり慣れ親しんでいない人にとって、 headline はとても理解しにくいのではないでしょうか。
+						 その理由の一つに、英字新聞の見出しは、＜特別な書式＞で書かれているからだ、ということが言えます。この書式には、文法上の特別なルールがある</textarea>
 					</div>
 					<div class="flex-2item-1">
 						<p class="headline top0">保有資格</p>
 					</div>
 					<div class="flex-2item-2">
-						<textarea class="borderbox" id="textareaHight">Java 1.8,Kotlin 1.2.41,Spring Boot 2.0.3.RELEASE,Keycloak 4.0.0.Final</textarea>
+						<textarea class="borderbox" id="textareaHight" th:field="*{userCertification}">Java 1.8,Kotlin 1.2.41,Spring Boot 2.0.3.RELEASE,
+						Keycloak 4.0.0.Final</textarea>
 					</div>
 					<div class="flex-2item-1">
 						<p class="headline top0">備考</p>
 					</div>
 					<div class="flex-2item-2">
-						<textarea id="textareaHight"></textarea>
+						<textarea id="textareaHight" th:field="*{userRemarks}"></textarea>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="centerbox">
+            <!-- <div class="lineup" th:if="${role >= 5}"> -->
 			<div class="lineup">
 				<input type="submit" value="更新" class="submitButton defolt bottomwidth width">
+				 <input type="hidden" name="userId" th:field="*{userId}">
+				 <input type="hidden" name="updateDate" th:field="*{updateDate}">
 			</div>
 
 			<div class="lineup">
@@ -142,6 +140,7 @@
 			</div>
 		</div>
 	</form>
+
 
 	</main>
 	<script type="text/javascript" src="js/unity.js"></script>
