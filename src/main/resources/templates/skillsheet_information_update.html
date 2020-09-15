@@ -11,12 +11,16 @@
 <body>
 	<header th:insert="/header"></header>
 	<main>
+	<form th:method="PUT" th:action="@{/skillsheet_information_update}" th:object="${skillSheet}" novalidate="novalidate">
 		<div>
 			<h1 class="pagetitle">基本情報更新</h1>
-			<p class="errorMessage">エラーメッセージがここに入ります</p>
+			<div class="errorMessage">
+        <ul th:if="${#fields.hasAnyErrors()}">
+          <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+        </ul>
+      </div>
 		</div>
 
-	<form th:method="PUT" th:action="@{/skillsheet_information_update}" th:object="${skillSheetBasicList}">
 	  <div class="box">
 			<p class="RequiredMessage left">※は必須項目です</p>
 			<div class="tablepaddig">
