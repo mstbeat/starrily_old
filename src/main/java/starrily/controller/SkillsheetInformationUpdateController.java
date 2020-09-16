@@ -1,10 +1,14 @@
 package starrily.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceResolvable;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +35,12 @@ public class SkillsheetInformationUpdateController {
 	@Autowired
 	private StarrilyService starrilyService;
 
+	/** メッセージソース */
+	@Autowired
+	private MessageSource messageSource;
+
+	MessageSourceResolvable PADCH028 = new DefaultMessageSourceResolvable("PADCH028");
+
 	/**
 	 ** 基本情報更新画面を表示
 	 * @return　基本情報更新画面に返す。
@@ -54,17 +64,26 @@ public class SkillsheetInformationUpdateController {
 	@PutMapping("/skillsheet_information_update")
 	public String update(@ModelAttribute @Valid SkillSheet Skillsheet,
 			BindingResult bindingResult,
-			Model model, 
-			RedirectAttributes redirectAttribute) {
-        
-		System.out.println(Skillsheet.getUserBirthday());
-		
+			Model model,
+			RedirectAttributes redirectAttribute,
+			Locale locale) {
+
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("skillSheet", Skillsheet);
+			List<Dropdown> dropdownInfo = starrilyService.getDropdownInfo(6);
+			model.addAttribute("dropdownInfo", dropdownInfo);
 			return "skillsheet_information_update";
 		}
-		
-		starrilyService.updateBasicInformation(Skillsheet);
+
+		Integer count = starrilyService.updateBasicInformation(Skillsheet);
+		if (count == 0) {
+			redirectAttribute.addFlashAttribute("message",
+					messageSource.getMessage("EMSG203", new MessageSourceResolvable[] { PADCH028 }, locale));
+			return "redirect:skillsheet_reference";
+		} else {
+			redirectAttribute.addFlashAttribute("message",
+					messageSource.getMessage("IMSG201", new MessageSourceResolvable[] { PADCH028 }, locale));
+		}
 
 		return "redirect:skillsheet_reference";
 	}

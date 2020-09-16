@@ -13,6 +13,7 @@
 <main>
 	<h1 class="pagetitle">スキルシート参照</h1>
 	<p class="errorMessage">エラーメッセージがここに入ります</p>
+  <p class="systemMessage" th:text="${message}"></p>
 	<div class="bottomspace">
 
 	<form th:method="POST" th:action="@{/engineer_list}">

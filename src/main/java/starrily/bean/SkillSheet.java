@@ -12,7 +12,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
-
 @Data
 public class SkillSheet implements Serializable {
 
@@ -42,45 +41,44 @@ public class SkillSheet implements Serializable {
 	/** フリガナ */
 	private String userPhonetic;
 	/** イニシャルネーム */
-	@NotBlank(message= "{EMSG001}")
-	@Pattern(regexp = "[a-zA-Z0-9.]*", message= "{EMSG005}") 
-	@Size(max = 3, message= "{EMSG009}")
+	@NotBlank(message = "{EMSG001}")
+	@Pattern(regexp = "[a-zA-Z0-9.]*", message = "{EMSG005}")
+	@Size(max = 3, message = "{EMSG009}")
 	private String userInitialName;
 	/** 性別 */
 	private String userSex;
 	/** 生年月日 */
-	@NotNull(message= "{EMSG001}")
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-//	@DateExists
+	@NotNull(message = "{EMSG001}")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date userBirthday;
 
 	/** 最終学歴 */
 	private String userFinalEducation;
 	/** 現住所 */
-	@NotBlank(message= "{EMSG001}")
-	@Size(max = 20, message= "{EMSG003}")
+	@NotBlank(message = "{EMSG001}")
+	@Size(max = 20, message = "{EMSG003}")
 	private String userAddress;
 
 	/** 年齢のカラム追加 */
 	private int userAge;
 
 	/** 最寄駅_線 */
-	@NotBlank(message= "{EMSG001}")
-	@Size(max = 20, message= "{EMSG003}")
+	@NotBlank(message = "{EMSG001}")
+	@Size(max = 20, message = "{EMSG003}")
 	private String userStationLine;
 	/** 最寄駅_駅 */
-	@NotBlank(message= "{EMSG001}")
-	@Size(max = 20, message= "{EMSG003}")
+	@NotBlank(message = "{EMSG001}")
+	@Size(max = 20, message = "{EMSG003}")
 	private String userStation;
 	/** アピールポイント */
-	@NotBlank(message= "{EMSG001}")
-	@Size(max = 1000, message= "{EMSG003}")
+	@NotBlank(message = "{EMSG001}")
+	@Size(max = 1000, message = "{EMSG003}")
 	private String userAppeal;
 	/** 保有資格 */
-	@Size(max = 1000, message= "{EMSG003}")
+	@Size(max = 1000, message = "{EMSG003}")
 	private String userCertification;
 	/** 備考 */
-	@Size(max = 500, message= "{EMSG003}")
+	@Size(max = 500, message = "{EMSG003}")
 	private String userRemarks;
 	/** 開始年月 */
 	private String startDate;

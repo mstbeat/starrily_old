@@ -11,7 +11,7 @@
 <body>
 	<header th:insert="/header"></header>
 	<main>
-	<form th:method="PUT" th:action="@{/skillsheet_information_update}" th:object="${skillSheet}" novalidate="novalidate">
+	<form th:method="PUT" th:action="@{/skillsheet_information_update}" th:object="${skillSheet}">
 		<div>
 			<h1 class="pagetitle">基本情報更新</h1>
 			<div class="errorMessage">
@@ -62,7 +62,7 @@
 						</div>
 						<div class="flex-4item-2">
 						  <select class="infomationinput" th:field="*{userFinalEducation}">
-						   <option th:each="dropdownInfo: ${dropdownInfo}" th:value="${dropdownInfo.itemName}"
+						    <option th:each="dropdownInfo: ${dropdownInfo}" th:value="${dropdownInfo.itemName}"
 							  th:text="${dropdownInfo.itemName}"></option>
 						  </select>
 						</div>
@@ -89,6 +89,7 @@
 						</div>
 						<div class="flex-4item-2">
 							<span class="leftmargin" th:text="*{userAge}"></span>&emsp; 歳
+              <input type="hidden" th:field="*{userAge}" th:value="${userAge}" />
 						</div>
 					</div>
 					<div class="flex-4item flex-container">

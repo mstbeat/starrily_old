@@ -60,7 +60,7 @@
         SUB.User_appeal = #{userAppeal},
         SUB.User_certification = #{userCertification},
         SUB.User_remarks = #{userRemarks},
-        SUB.Update_date = #{updateDate}
+        SUB.Update_date = CURRENT_TIMESTAMP()
     WHERE
         UI.User_id= #{userId}
         AND UI.Delete_flg = '0'
