@@ -6,18 +6,20 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/unity.css">
 <link rel="stylesheet" type="text/css" href="css/skillsheet_update.css">
+<script type="text/javascript" th:src="@{/js/validateDate.js}"></script>
 <title>スキルシート更新-基本情報</title>
 </head>
 <body>
 	<header th:insert="/header"></header>
 	<main>
-	<form th:method="PUT" th:action="@{/skillsheet_information_update}" th:object="${skillSheet}">
+	<form th:method="PUT" id="form" th:action="@{/skillsheet_information_update}" th:object="${skillSheet}" novalidate="novalidate">
 		<div>
 			<h1 class="pagetitle">基本情報更新</h1>
 			<div class="errorMessage">
         <ul th:if="${#fields.hasAnyErrors()}">
           <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
         </ul>
+        <p class="errorMessage" id="message" th:text="${message}"></p>
       </div>
 		</div>
 
@@ -52,7 +54,7 @@
 						</div>
 						<div class="flex-4item-2">
 							<p>
-							  <input type="date" class="infomationinput bottommargin" th:field="*{userBirthday}">
+							  <input type="date" id="date" class="infomationinput bottommargin" th:field="*{userBirthday}">
 							</p>
 						</div>
 					</div>

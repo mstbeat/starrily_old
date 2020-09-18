@@ -66,8 +66,12 @@ public class SkillsheetInformationUpdateController {
 			BindingResult bindingResult,
 			Model model,
 			RedirectAttributes redirectAttribute,
-			Locale locale) {
+			Locale locale,
+			String message) {
 
+		if (message != null) {
+			model.addAttribute("message", message);
+		}
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("skillSheet", Skillsheet);
 			List<Dropdown> dropdownInfo = starrilyService.getDropdownInfo(6);
