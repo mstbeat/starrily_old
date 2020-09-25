@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
+import starrily.validator.BirthYearAfter;
+import starrily.validator.BirthYearBefore;
 
 @Data
 public class SkillSheet implements Serializable {
@@ -50,6 +52,8 @@ public class SkillSheet implements Serializable {
 	/** 生年月日 */
 	@NotNull(message = "{EMSG001}")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@BirthYearAfter(year = "2020")
+	@BirthYearBefore(year = "1950")
 	private Date userBirthday;
 
 	/** 最終学歴 */
