@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 import starrily.validator.BirthYearAfter;
 import starrily.validator.BirthYearBefore;
+import starrily.validator.SkillsheetGroup;
 
 @Data
 public class SkillSheet implements Serializable {
@@ -43,46 +44,46 @@ public class SkillSheet implements Serializable {
 	/** フリガナ */
 	private String userPhonetic;
 	/** イニシャルネーム */
-	@NotBlank(message = "{EMSG001}")
-	@Pattern(regexp = "[a-zA-Z0-9.]*", message = "{EMSG005}")
-	@Size(max = 3, message = "{EMSG009}")
+	@NotBlank(message = "{EMSG001}", groups = {SkillsheetGroup.class})
+	@Pattern(regexp = "[a-zA-Z0-9.]*", message = "{EMSG005}", groups = {SkillsheetGroup.class})
+	@Size(max = 3, message = "{EMSG009}", groups = {SkillsheetGroup.class})
 	private String userInitialName;
 	/** 性別 */
 	private String userSex;
 	/** 生年月日 */
-	@NotNull(message = "{EMSG001}")
+	@NotNull(message = "{EMSG001}", groups = {SkillsheetGroup.class})
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@BirthYearAfter(year = "2020")
-	@BirthYearBefore(year = "1950")
+	@BirthYearAfter(year = "2020", groups = {SkillsheetGroup.class})
+	@BirthYearBefore(year = "1950", groups = {SkillsheetGroup.class})
 	private Date userBirthday;
 
 	/** 最終学歴 */
 	private String userFinalEducation;
 	/** 現住所 */
-	@NotBlank(message = "{EMSG001}")
-	@Size(max = 20, message = "{EMSG003}")
+	@NotBlank(message = "{EMSG001}", groups = {SkillsheetGroup.class})
+	@Size(max = 20, message = "{EMSG003}", groups = {SkillsheetGroup.class})
 	private String userAddress;
 
 	/** 年齢のカラム追加 */
 	private int userAge;
 
 	/** 最寄駅_線 */
-	@NotBlank(message = "{EMSG001}")
-	@Size(max = 20, message = "{EMSG003}")
+	@NotBlank(message = "{EMSG001}", groups = {SkillsheetGroup.class})
+	@Size(max = 20, message = "{EMSG003}", groups = {SkillsheetGroup.class})
 	private String userStationLine;
 	/** 最寄駅_駅 */
-	@NotBlank(message = "{EMSG001}")
-	@Size(max = 20, message = "{EMSG003}")
+	@NotBlank(message = "{EMSG001}", groups = {SkillsheetGroup.class})
+	@Size(max = 20, message = "{EMSG003}", groups = {SkillsheetGroup.class})
 	private String userStation;
 	/** アピールポイント */
-	@NotBlank(message = "{EMSG001}")
-	@Size(max = 1000, message = "{EMSG003}")
+	@NotBlank(message = "{EMSG001}", groups = {SkillsheetGroup.class})
+	@Size(max = 1000, message = "{EMSG003}", groups = {SkillsheetGroup.class})
 	private String userAppeal;
 	/** 保有資格 */
-	@Size(max = 1000, message = "{EMSG003}")
+	@Size(max = 1000, message = "{EMSG003}", groups = {SkillsheetGroup.class})
 	private String userCertification;
 	/** 備考 */
-	@Size(max = 500, message = "{EMSG003}")
+	@Size(max = 500, message = "{EMSG003}", groups = {SkillsheetGroup.class})
 	private String userRemarks;
 	/** 開始年月 */
 	private String startDate;

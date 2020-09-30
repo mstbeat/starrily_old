@@ -3,8 +3,6 @@ package starrily.controller;
 import java.util.List;
 import java.util.Locale;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
@@ -12,6 +10,7 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import starrily.bean.Dropdown;
 import starrily.bean.SkillSheet;
 import starrily.service.StarrilyService;
+import starrily.validator.SkillsheetGroup;
 
 /**
  * 基本情報更新クラス
@@ -62,7 +62,7 @@ public class SkillsheetInformationUpdateController {
 	 * @return スキルシート参照画面に返す。
 	 */
 	@PutMapping("/skillsheet_information_update")
-	public String update(@ModelAttribute @Valid SkillSheet Skillsheet,
+	public String update(@ModelAttribute @Validated(SkillsheetGroup.class) SkillSheet Skillsheet,
 			BindingResult bindingResult,
 			Model model,
 			RedirectAttributes redirectAttribute,
